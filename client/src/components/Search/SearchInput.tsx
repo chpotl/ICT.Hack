@@ -2,10 +2,10 @@ import React from "react"
 import { Search } from "../Icons/Search"
 import { SlashShortCut } from "./SlashShortCut"
 
-export const TextInput = () => {
+export const SearchInput = () => {
   return (
     <label>
-      <div className='flex items-center bg-lightBlack p-2 rounded-[20px] border-2 border-lightGray space-x-2 px-5'>
+      <div className='flex items-center bg-lightBlack p-2 rounded-[20px] border border-lightGray space-x-2 px-5'>
         <div>
           <Search />
         </div>

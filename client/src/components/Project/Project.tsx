@@ -1,6 +1,6 @@
 import React from "react"
 import photo from "../../assets/project_logo.png"
-import { Button } from "../Button/Button"
+import { Button } from "../Buttons/Button"
 import { Tag } from "./Tag"
 
 export const Project = () => {
@@ -46,6 +46,7 @@ export const Project = () => {
         </div>
 
         <Button
+          onClick={() => {}}
           title={"Подробнее"}
           className={"bg-darkGreen py-[10px] rounded-[10px]"}
         />
