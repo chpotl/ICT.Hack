@@ -5,7 +5,7 @@ interface Props {
   title: string
 }
 
-export const Wrapper: FC<Props> = ({ children, title }) => {
+export const WrapperTitle: FC<Props> = ({ children, title }) => {
   return (
     <>
       <span className='text-2xl text-lightGray'>{title}</span>

@@ -5,7 +5,7 @@ import { Dropdown } from "../Dropdowns/Dropdown"
 import { DownloadInput } from "../Inputs/DownloadInput"
 import { LabelInput } from "../Inputs/LabelInput"
 import { TextArea } from "../Inputs/TextArea"
-import { Wrapper } from "../Profile/Wrapper"
+import { WrapperTitle } from "../Profile/WrapperTitle"
 import { Form } from "./Form"
 import { Label } from "./Label"
 
@@ -17,7 +17,7 @@ export const CreateProjectForm = () => {
 
   return (
     <Form title={"Создать проект"} onSubmit={onSubmit}>
-      <Wrapper title='Общие данные'>
+      <WrapperTitle title='Общие данные'>
         <LabelInput
           value={""}
           setValue={() => {}}
@@ -47,9 +47,9 @@ export const CreateProjectForm = () => {
             <SkillButton title={tag} key={i} />
           ))}
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
-      <Wrapper title='Описание проекта'>
+      <WrapperTitle title='Описание проекта'>
         <TextArea
           maxLength={280}
           label={"Короткое описание"}
@@ -91,9 +91,9 @@ export const CreateProjectForm = () => {
             <SkillButton title={person} key={i} />
           ))}
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
-      <Wrapper title='Презентация'>
+      <WrapperTitle title='Презентация'>
         <div className='flex space-x-2'>
           <Label label='Логотип'>
             <DownloadInput />
@@ -125,7 +125,7 @@ export const CreateProjectForm = () => {
             <DownloadInput />
           </Label>
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
       <div className='flex justify-between'>
         <Button

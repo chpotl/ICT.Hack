@@ -8,7 +8,7 @@ import { LabelInput } from "../Inputs/LabelInput"
 import { TextArea } from "../Inputs/TextArea"
 import { TextInput } from "../Inputs/TextInput"
 import { BackgroundImage } from "../Profile/BackgroundImage"
-import { Wrapper } from "../Profile/Wrapper"
+import { WrapperTitle } from "../Profile/WrapperTitle"
 import { SearchInput } from "../Search/SearchInput"
 import { Form } from "./Form"
 import { Label } from "./Label"
@@ -23,7 +23,7 @@ export const ProfileForm = () => {
     <Form title='Редактирование профиля' onSubmit={onSubmit}>
       <BackgroundImage />
 
-      <Wrapper title='Мои данные'>
+      <WrapperTitle title='Мои данные'>
         <LabelInput
           value={""}
           setValue={() => {}}
@@ -58,9 +58,9 @@ export const ProfileForm = () => {
             <SearchInput placeholder={"город"} />
           </Label>
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
-      <Wrapper title='Обо мне'>
+      <WrapperTitle title='Обо мне'>
         <TextArea
           maxLength={140}
           label={"Описание"}
@@ -93,9 +93,9 @@ export const ProfileForm = () => {
             <SkillButton title={skill} key={i} />
           ))}
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
-      <Wrapper title='Контакты'>
+      <WrapperTitle title='Контакты'>
         <div className='flex justify-between items-center gap-x-5'>
           <LabelInput
             value={""}
@@ -126,7 +126,7 @@ export const ProfileForm = () => {
             label='LinkedIn'
           />
         </div>
-      </Wrapper>
+      </WrapperTitle>
 
       <div className='flex justify-between'>
         <Button

@@ -5,6 +5,7 @@ import { AppBody } from "./AppBody"
 import { CreateProject } from "./CreateProject/CreateProject"
 import { Home } from "./Home/Home"
 import { Profile } from "./Profile/Profile"
+import { Project } from "./Project/Project"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/project/:id' element={<Project />} />
           <Route path='/create-project' element={<CreateProject />} />
         </Routes>
       </AppBody>
