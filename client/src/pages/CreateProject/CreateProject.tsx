@@ -1,5 +1,7 @@
 import React from "react"
+import { CreateProjectForm } from "../../components/Forms/CreateProjectForm"
+import { Form } from "../../components/Forms/Form"
 
 export const CreateProject = () => {
-  return <div className='bg-lightBlack rounded-[20px] p-5'></div>
+  return <CreateProjectForm />
 }

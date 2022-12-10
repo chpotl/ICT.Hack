@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { Footer } from "../components/Footer/Footer"
 import { Navbar } from "../components/Navbar/Navbar"
 import { AppBody } from "./AppBody"
+import { CreateProject } from "./CreateProject/CreateProject"
 import { Home } from "./Home/Home"
 import { Profile } from "./Profile/Profile"
 
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/create-project' element={<CreateProject />} />
         </Routes>
       </AppBody>
     </Router>

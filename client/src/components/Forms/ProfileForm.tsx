@@ -10,13 +10,17 @@ import { TextInput } from "../Inputs/TextInput"
 import { BackgroundImage } from "../Profile/BackgroundImage"
 import { Wrapper } from "../Profile/Wrapper"
 import { SearchInput } from "../Search/SearchInput"
+import { Form } from "./Form"
+import { Label } from "./Label"
 
 export const ProfileForm = () => {
   const roles = ["Разработчик", "Ученый", "Дизайнер"]
   const skills = ["Next.js", "React.js", "TypeScript"]
 
+  const onSubmit = () => {}
+
   return (
-    <form className='flex flex-col gap-y-5'>
+    <Form title='Редактирование профиля' onSubmit={onSubmit}>
       <BackgroundImage />
 
       <Wrapper title='Мои данные'>
@@ -47,8 +51,12 @@ export const ProfileForm = () => {
         </div>
 
         <div className='grid grid-cols-[0.5fr__1fr] gap-x-5 w-full'>
-          <Dropdown title={"страна"} data={["1", "2", "3"]} />
-          <SearchInput placeholder={"город"} />
+          <Label label='Страна'>
+            <Dropdown title={"страна"} data={["1", "2", "3"]} />
+          </Label>
+          <Label label='Город'>
+            <SearchInput placeholder={"город"} />
+          </Label>
         </div>
       </Wrapper>
 
@@ -134,6 +142,6 @@ export const ProfileForm = () => {
           onClick={() => {}}
         />
       </div>
-    </form>
+    </Form>
   )
 }
