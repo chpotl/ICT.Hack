@@ -11,4 +11,6 @@ router.get('/username/:username', userController.getUser);
 router.use(authController.protect);
 router.get('/me', userController.getMe);
 router.patch('/updateMe', userController.updateMe);
+router.post('/addFav', userController.addFavorite);
+router.post('/removeFav', userController.removeFavorite);
 module.exports = router;

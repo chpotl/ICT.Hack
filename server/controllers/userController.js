@@ -1,6 +1,7 @@
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
+const Project = require('../models/projectModel');
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   await User.updateOne(
@@ -22,6 +23,35 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     message: 'success',
   });
 });
+
+exports.addFavorite = catchAsync(async (req, res, next) => {
+  const project = await Project.findById(req.body.projectId);
+  if (!project) {
+    return next(new AppError('No such project', 404));
+  }
+  await User.updateOne(
+    { _id: req.user._id },
+    { $push: { favorite: req.body.projectId } }
+  );
+  res.status(200).json({
+    message: 'success',
+  });
+});
+
+exports.removeFavorite = catchAsync(async (req, res, next) => {
+  const project = await Project.findById(req.body.projectId);
+  if (!project) {
+    return next(new AppError('No such project', 404));
+  }
+  await User.updateOne(
+    { _id: req.user._id },
+    { $pull: { favorite: req.body.projectId } }
+  );
+  res.status(200).json({
+    message: 'success',
+  });
+});
+
 exports.getMe = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ _id: req.user._id }).populate(
     'roles location.country favorite'

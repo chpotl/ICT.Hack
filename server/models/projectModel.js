@@ -76,6 +76,11 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  region: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Country',
+    required: true,
+  },
 });
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;
