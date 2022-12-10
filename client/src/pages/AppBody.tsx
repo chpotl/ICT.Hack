@@ -1,4 +1,6 @@
 import React from "react"
+import { Footer } from "../components/Footer/Footer"
+import { Navbar } from "../components/Navbar/Navbar"
 
 type Props = {
   children: React.ReactNode
@@ -6,8 +8,10 @@ type Props = {
 
 export const AppBody = ({ children }: Props) => {
   return (
-    <main className='relative w-screen h-screen mx-auto bg-black text-white overflow-hidden'>
-      {children}
-    </main>
+    <div className='bg-black text-white overflow-x-hidden'>
+      <Navbar />
+      <main className='w-screen h-screen mx-auto p-5'>{children}</main>
+      {/* <Footer /> */}
+    </div>
   )
 }

@@ -1,18 +1,18 @@
 import React, { FC } from "react"
-import { TButton } from "./Dropdown"
+import { TNavLink } from "./Menu"
 import { Link } from "react-router-dom"
 
 interface Props {
-  button: TButton
+  navlink: TNavLink
 }
 
-export const Button: FC<Props> = ({ button }) => {
+export const NavLink: FC<Props> = ({ navlink }) => {
   return (
     <Link to={""}>
       <div className='flex space-x-2 justify-between items-center w-full border'>
-        {button.logo}
+        {navlink.logo}
         <div className='flex justify-start w-full'>
-          <span className='text-sm font-normal'>{button.title}</span>
+          <span className='text-sm font-normal'>{navlink.title}</span>
         </div>
       </div>
     </Link>
