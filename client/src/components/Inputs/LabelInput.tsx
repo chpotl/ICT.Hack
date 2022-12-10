@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { ITextInput } from "./TextInput"
 
-interface ILabelInput extends ITextInput {
+export interface ILabelInput extends ITextInput {
   label: string
 }
 

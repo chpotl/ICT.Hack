@@ -11,7 +11,7 @@ export const AppBody = ({ children }: Props) => {
     <div className='bg-black text-white overflow-x-hidden'>
       <Navbar />
       <main className='w-screen h-screen mx-auto p-5'>{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
