@@ -3,9 +3,9 @@ import { useModal } from "../../hooks/useModal"
 import { Button } from "../Buttons/Button"
 import { Logo } from "../Logo/Logo"
 import { Modal } from "../Modals/Modal"
-import { SignUpLogin } from "../Modals/SignUpLogin"
-import { Menu } from "../Profile/Menu"
-import { Profile } from "../Profile/Profile"
+import { SignUpLogin } from "../Forms/SignUpLogin"
+import { Menu } from "./Menu"
+import { Profile } from "./Profile"
 import { SearchInput } from "../Search/SearchInput"
 import { Links } from "./Links"
 
@@ -20,7 +20,7 @@ export const Navbar = () => {
     <>
       <nav className='flex justify-between items-center p-5 w-full'>
         <Logo />
-        <SearchInput />
+        <SearchInput placeholder='Искать грант' />
 
         <div className='flex items-center space-x-10'>
           <Links />

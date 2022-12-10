@@ -1,8 +1,12 @@
-import React from "react"
+import React, { FC } from "react"
 import { Search } from "../Icons/Search"
 import { SlashShortCut } from "./SlashShortCut"
 
-export const SearchInput = () => {
+interface Props {
+  placeholder: string
+}
+
+export const SearchInput: FC<Props> = ({ placeholder }) => {
   return (
     <label>
       <div className='flex items-center bg-lightBlack p-2 rounded-[20px] border border-lightGray space-x-2 px-5'>
@@ -10,7 +14,7 @@ export const SearchInput = () => {
           <Search />
         </div>
         <input
-          placeholder='Искать грант'
+          placeholder={placeholder}
           className='bg-lightBlack border-none outline-none w-full text-2xl text-white placeholder:text-white'
         />
         <SlashShortCut />
