@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import { Wrapper } from "./Wrapper"
 
 interface Props {
   children: React.ReactNode
@@ -8,11 +9,11 @@ interface Props {
 
 export const Form: FC<Props> = ({ children, onSubmit, title }) => {
   return (
-    <div className='bg-lightBlack rounded-[20px] p-5'>
+    <Wrapper>
       <h1 className='font-bold text-4xl mb-5'>{title}</h1>
       <form className='flex flex-col gap-y-5' onSubmit={onSubmit}>
         {children}
       </form>
-    </div>
+    </Wrapper>
   )
 }
