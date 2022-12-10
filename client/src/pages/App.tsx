@@ -6,6 +6,7 @@ import { CreateProject } from "./CreateProject/CreateProject"
 import { Home } from "./Home/Home"
 import { Profile } from "./Profile/Profile"
 import { Project } from "./Project/Project"
+import { UpdateProfile } from "./UpdateProfile/UpdateProfile"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/profile-update' element={<UpdateProfile />} />
           <Route path='/project/:id' element={<Project />} />
           <Route path='/create-project' element={<CreateProject />} />
         </Routes>
