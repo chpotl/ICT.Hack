@@ -6,11 +6,6 @@ const countrySchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  logoUrl: {
-    type: String,
-    unique: true,
-    required: true,
-  },
 });
 
 const Country = mongoose.model('Country', countrySchema);

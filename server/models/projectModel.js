@@ -15,8 +15,7 @@ const projectSchema = new mongoose.Schema({
   },
   tags: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Tag',
+      type: String,
     },
   ],
   shortDescription: {
@@ -30,6 +29,11 @@ const projectSchema = new mongoose.Schema({
     required: true,
     maxLenght: 600,
     minLenght: 10,
+  },
+  investments: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   webSite: {
     type: String,
@@ -73,6 +77,5 @@ const projectSchema = new mongoose.Schema({
     required: true,
   },
 });
-
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;

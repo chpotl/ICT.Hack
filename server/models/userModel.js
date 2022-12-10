@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -20,28 +22,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-    required: [true, 'username is empty'],
     unique: true,
   },
   firstName: {
     type: String,
     trim: true,
-    required: [true, 'firstName is empty'],
   },
   secondName: {
     type: String,
     trim: true,
-    required: [true, 'secondName is empty'],
   },
   location: {
     country: {
       type: mongoose.Schema.ObjectId,
       ref: 'Country',
-      required: true,
     },
     city: {
       type: String,
-      required: true,
     },
   },
   bio: {
@@ -54,7 +51,6 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.ObjectId,
       ref: 'Role',
-      required: true,
     },
   ],
   skills: [
@@ -93,12 +89,29 @@ const userSchema = new mongoose.Schema({
       ref: 'Project',
     },
   ],
+  avatarUrl: {
+    type: String,
+  },
+  coverUrl: {
+    type: String,
+  },
   userRole: {
     type: String,
     enum: ['user', 'admin', 'moderator'],
     default: 'user',
   },
 });
+userSchema.pre('save', async function (next) {
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
