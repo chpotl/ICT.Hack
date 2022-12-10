@@ -7,6 +7,7 @@ exports.getAll = catchAsync(async (req, res, next) => {
   const page = +req.query.page || 1;
   const limit = +req.query.limit || 10;
   const tagsReq = req.query.tags;
+  const regionsReq = req.query.regions;
   const categoryReq = req.query.category;
   const minInvest = req.query.minInvest || 0;
   const maxInvest = req.query.maxInvest || Infinity;
@@ -20,6 +21,12 @@ exports.getAll = catchAsync(async (req, res, next) => {
       return { tags: el };
     });
     match.$or = tagsArr;
+  }
+  if (regionsReq) {
+    const regionsArr = regionsReq.split(',').map((el) => {
+      return { region: el };
+    });
+    match.$or = regionsArr;
   }
   match.$and = [
     { investments: { $gte: minInvest } },
@@ -51,6 +58,8 @@ exports.create = catchAsync(async (req, res, next) => {
     teamMembers: req.body.teamMembers,
     demoUrl: req.body.demoUrl,
     creator: req.user._id,
+    region: req.body.region,
+    investments: req.body.investments,
   });
   if (req.body.tags) {
     const tags = req.body.tags;
