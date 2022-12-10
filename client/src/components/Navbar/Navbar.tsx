@@ -1,12 +1,15 @@
 import { useState } from "react"
+import { Button } from "../Button/Button"
 import { Logo } from "../Logo/Logo"
-import { Dropdown } from "../Profile/Dropdown"
+import { Menu } from "../Profile/Menu"
 import { Profile } from "../Profile/Profile"
 import { TextInput } from "../Search/TextInput"
 import { Links } from "./Links"
 
 export const Navbar = () => {
   const [isProfileDropdownOpen, setProfileDropdownOpened] = useState(false)
+
+  const isLogged = false
 
   return (
     <nav className='flex justify-between items-center p-5 w-full'>
@@ -17,11 +20,20 @@ export const Navbar = () => {
         <Links />
 
         <div className='relative'>
-          <Profile
-            setProfileDropdownOpened={setProfileDropdownOpened}
-            isProfileDropdownOpen={isProfileDropdownOpen}
-          />
-          {isProfileDropdownOpen && <Dropdown />}
+          {isLogged ? (
+            <>
+              <Profile
+                setProfileDropdownOpened={setProfileDropdownOpened}
+                isProfileDropdownOpen={isProfileDropdownOpen}
+              />
+              {isProfileDropdownOpen && <Menu />}
+            </>
+          ) : (
+            <Button
+              title='Войти'
+              className='bg-darkGreen px-5 py-[15px] rounded-[20px]'
+            />
+          )}
         </div>
       </div>
     </nav>
