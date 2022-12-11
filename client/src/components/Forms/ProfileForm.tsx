@@ -25,6 +25,7 @@ export const ProfileForm = () => {
 
       <WrapperTitle title='Мои данные'>
         <LabelInput
+          required={true}
           value={""}
           setValue={() => {}}
           placeholder={"имя пользователя"}
@@ -34,6 +35,7 @@ export const ProfileForm = () => {
 
         <div className='flex justify-between items-center w-full gap-x-5'>
           <LabelInput
+            required={true}
             value={""}
             setValue={() => {}}
             placeholder={"ваше имя"}
@@ -42,6 +44,7 @@ export const ProfileForm = () => {
           />
 
           <LabelInput
+            required={true}
             value={""}
             setValue={() => {}}
             placeholder={"ваша фамилия"}
@@ -51,10 +54,10 @@ export const ProfileForm = () => {
         </div>
 
         <div className='grid grid-cols-[0.5fr__1fr] gap-x-5 w-full'>
-          <Label label='Страна'>
+          <Label required={true} label='Страна'>
             <Dropdown title={"страна"} data={["1", "2", "3"]} />
           </Label>
-          <Label label='Город'>
+          <Label required={true} label='Город'>
             <SearchInput placeholder={"город"} />
           </Label>
         </div>
