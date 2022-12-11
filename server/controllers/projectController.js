@@ -35,7 +35,8 @@ exports.getAll = catchAsync(async (req, res, next) => {
   const projects = await Project.find(match)
     .populate('category creator')
     .limit(limit)
-    .skip((page - 1) * limit);
+    .skip((page - 1) * limit)
+    .sort({ trendIndex: -1 });
   res.status(200).json({
     message: 'success',
     found: projects.length,
