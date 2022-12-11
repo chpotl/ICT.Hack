@@ -39,3 +39,43 @@ export interface ISignUpLogin {
   email: string
   password: string
 }
+
+export interface Country {
+  _id: string
+  name: string
+}
+
+export interface Location {
+  country: Country
+  city: string
+}
+
+export interface Socials {
+  twitter: string
+  telegram: string
+  github: string
+  linkedin: string
+}
+
+export interface Role {
+  _id: string
+  name: string
+}
+
+export interface IUser {
+  location: Location
+  socials: Socials
+  _id: string
+  email: string
+  roles: Role[]
+  skills: string[]
+  favorite: any[]
+  userRole: string
+  username: string
+  bio: string
+  cvUrl: string
+  firstName: string
+  secondName: string
+  avatarUrl: string
+  coverUrl: string
+}

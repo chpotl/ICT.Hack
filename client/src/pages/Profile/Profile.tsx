@@ -1,36 +1,57 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useQuery } from "wagmi"
 import { Wrapper } from "../../components/Forms/Wrapper"
+import { UserService } from "../../services/user"
 
 export const Profile = () => {
+  const { data, isError, isLoading } = useQuery(
+    ["user"],
+    () => UserService.getMe(),
+    {
+      select: (data) => data.user,
+    }
+  )
+
   return (
     <Wrapper>
-      <section className=''>
-        <img
-          src='https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZGV2ZWxvcGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60'
-          alt=''
-          className='h-60 rounded-[20px] w-full object-cover'
-        />
-
-        <img
-          src={
-            "https://images.unsplash.com/photo-1602992708529-c9fdb12905c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGRldmVsb3BlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-          }
-          alt=''
-          className={"h-[190px] w-[190px] rounded-full -bottom-20 left-20"}
-        />
+      <section>
+        <div className='relative'>
+          <img
+            src={data?.coverUrl}
+            alt=''
+            className='h-60 rounded-[20px] w-full object-cover'
+          />
+          <img
+            src={data?.avatarUrl}
+            alt=''
+            className={
+              "h-[190px] w-[190px] rounded-full left-20 absolute top-5"
+            }
+          />
+        </div>
       </section>
 
-      <section className='flex justify-between gap-x-2 items-center'>
+      <section className='flex justify-between gap-x-2 items-center mt-5'>
         <div className='space-x-2'>
-          <span className='text-2xl font-bold'>Леонид Зотов</span>
-          <span className='text-2xl font-normal '>Россия</span>
+          <span className='text-2xl font-bold'>
+            {data?.firstName} {data?.secondName}
+          </span>
+          <span className='text-2xl font-normal '>
+            {data?.location.country.name}
+          </span>
         </div>
 
         <div className='flex items-center gap-x-5 socials text-2xl font-normal text-darkGreen'>
-          <a href=''>Twitter</a>
-          <a href=''>Telegram</a>
-          <a href=''>GitHub</a>
+          <a target={"_blank"} href={data?.socials.twitter}>
+            Twitter
+          </a>
+          <a target={"_blank"} href={data?.socials.telegram}>
+            Telegram
+          </a>
+          <a target={"_blank"} href={data?.socials.github}>
+            GitHub
+          </a>
         </div>
 
         <Link to={"/profile-update"}>
@@ -38,11 +59,29 @@ export const Profile = () => {
         </Link>
       </section>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-      </p>
+      <p>{data?.bio}</p>
+
+      <div className='skills mt-5 border border-lightGray p-5 rounded-[20px]'>
+        <span className=' text-2xl font-bold'>Роли</span>
+        <div className='flex flex-wrap gap-5'>
+          {data?.roles.map((role) => (
+            <div className='bg-white p-2 text-black rounded-2xl font-bold text-xxl'>
+              {role.name}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className='skills mt-5 border border-lightGray p-5 rounded-[20px]'>
+        <span className=' text-2xl font-bold'>Навыки</span>
+        <div className='flex flex-wrap gap-5'>
+          {data?.skills.map((skill) => (
+            <div className='bg-white p-2 text-black rounded-2xl font-bold text-xxl'>
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
     </Wrapper>
   )
 }
