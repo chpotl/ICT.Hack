@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const trendController = require('../controllers/trendController');
+const validator = require('validator');
 
 const projectSchema = new mongoose.Schema({
   name: {
@@ -81,6 +83,26 @@ const projectSchema = new mongoose.Schema({
     ref: 'Country',
     required: true,
   },
+  walletAddress: {
+    type: String,
+    validate: [validator.isEthereumAddress, 'not an eth address'],
+    required: true,
+    unique: true,
+  },
+  trendIndex: {
+    type: Number,
+    required: true,
+    default: 30,
+  },
 });
+
+projectSchema.pre('save', async function (next) {
+  if (!this.tags) {
+    return next(new AppError('Tags are empty', 500));
+  }
+  this.trendIndex = Math.round(await trendController.getIndex(this.tags));
+  next();
+});
+
 const Project = mongoose.model('Project', projectSchema);
 module.exports = Project;
