@@ -81,7 +81,6 @@ const userSchema = new mongoose.Schema({
   },
   cvUrl: {
     type: String,
-    unique: true,
   },
   favorite: [
     {
@@ -103,6 +102,7 @@ const userSchema = new mongoose.Schema({
 });
 userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
+  this.username = `user${Math.floor(Math.random() * (10000 - 100 + 1) + 100)}`;
   next();
 });
 
