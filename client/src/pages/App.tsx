@@ -7,6 +7,7 @@ import { Home } from "./Home/Home"
 import { Profile } from "./Profile/Profile"
 import { Project } from "./Project/Project"
 import { UpdateProfile } from "./UpdateProfile/UpdateProfile"
+import Cookies from "js-cookie"
 
 function App() {
   return (

@@ -5,5 +5,5 @@ type TImage = {
 }
 
 export const Image: FC<TImage> = ({ url }) => {
-  return <img src={url} alt={url} className='rounded-[20px]' />
+  return <img src={url} alt={url} className='rounded-[20px] h-96' />
 }

@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button } from "../Buttons/Button"
 import { SelectButton } from "../Buttons/SelectButton"
 import { SkillButton } from "../Buttons/SkillButton"
 import { Dropdown } from "../Dropdowns/Dropdown"
 import { Search } from "../Icons/Search"
+import { EnterInput } from "../Inputs/EnterInput"
 import { LabelInput } from "../Inputs/LabelInput"
 import { TextArea } from "../Inputs/TextArea"
 import { TextInput } from "../Inputs/TextInput"
@@ -14,8 +15,8 @@ import { Form } from "./Form"
 import { Label } from "./Label"
 
 export const ProfileForm = () => {
-  const roles = ["Разработчик", "Ученый", "Дизайнер"]
-  const skills = ["Next.js", "React.js", "TypeScript"]
+  const [skills, setSkills] = useState<string[]>([])
+  const [roles, setRoles] = useState<string[]>([])
 
   const onSubmit = () => {}
 
@@ -72,30 +73,25 @@ export const ProfileForm = () => {
           placeholder={"коротко обо мне"}
         />
 
-        <span className='font-bold text-xl'>Роли</span>
+        {/* <span className='font-bold text-xl'>Роли</span>
 
         <div className='flex flex-wrap gap-2 w-full'>
           {roles.map((role, i) => (
             <SelectButton title={role} key={i} />
           ))}
-        </div>
-        <div>
-          <LabelInput
-            value={""}
-            setValue={() => {}}
-            placeholder={"мои навыки"}
-            type={"text"}
-            label='Навыки'
-          />
-
-          <span className='text-gray'>нажмите Enter после ввода навыка</span>
-        </div>
-
-        <div className='flex flex-wrap gap-2 w-full'>
-          {skills.map((skill, i) => (
-            <SkillButton title={skill} key={i} />
-          ))}
-        </div>
+        </div> */}
+        <EnterInput
+          selectors={roles}
+          setSelectors={setRoles}
+          label={"Роли"}
+          placeholder={"мои роли"}
+        />
+        <EnterInput
+          selectors={skills}
+          setSelectors={setSkills}
+          label={"Навыки"}
+          placeholder={"мои навыки"}
+        />
       </WrapperTitle>
 
       <WrapperTitle title='Контакты'>

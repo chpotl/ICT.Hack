@@ -14,10 +14,12 @@ export const LabelInput: FC<ILabelInput> = ({
   type,
   label,
   required,
+  name,
 }) => {
   return (
     <Label label={label} required={required}>
       <input
+        name={name}
         type={type}
         className='text-xl placeholder:text-lightGray text-white border border-lightGray bg-lightBlack px-[20px] py-[13px] w-full rounded-[20px] outline-none font-normal'
         onChange={setValue}

@@ -15,9 +15,11 @@ export const Profile: FC<Props> = ({ isMenuOpen, setMenuOpened }) => {
     <div className='flex items-center space-x-2'>
       <button
         onClick={() => setMenuOpened(!isMenuOpen)}
-        className='rounded-full bg-lightGray flex justify-center items-center w-[70px] h-[70px]'
+        className={`rounded-full bg-lightGray flex justify-center items-center w-[70px] h-[70px] group hover:bg-black  transition-colors duration-500 ease`}
       >
-        <span className='font-bold text-xl text-white'>ЛЗ</span>
+        <span className='font-bold text-xl text-white group-hover:text-mainGreen'>
+          ЛЗ
+        </span>
       </button>
       <div className={isArrowRotate}>
         <Arrow />

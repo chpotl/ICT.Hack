@@ -3,14 +3,8 @@ import { Button } from "../Buttons/Button"
 import { TextInput } from "../Inputs/TextInput"
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import {
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-} from "formik"
+import { useMutation } from "react-query"
+import { UserService } from "../../services/user"
 
 interface ISignUpLogin {
   email: string
@@ -18,6 +12,8 @@ interface ISignUpLogin {
 }
 
 export const SignUpLogin = () => {
+  const mutation = useMutation((user) => UserService.register(user))
+
   const initialValues: ISignUpLogin = {
     email: "",
     password: "",
@@ -33,6 +29,11 @@ export const SignUpLogin = () => {
     onSubmit: (values) => {
       console.log("form submitted")
       console.log(values)
+
+      mutation.mutate({
+        email: formik.values.email,
+        password: formik.values.password,
+      })
     },
   })
 

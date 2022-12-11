@@ -3,7 +3,7 @@ import { useModal } from "../../hooks/useModal"
 import { Button } from "../Buttons/Button"
 import { Logo } from "../Logo/Logo"
 import { Modal } from "../Modals/Modal"
-import { SignUpLogin } from "../Modals/SignUpLogin"
+import { SignUpLogin } from "../Forms/SignUpLogin"
 import { Menu } from "./Menu"
 import { Profile } from "./Profile"
 import { SearchInput } from "../Search/SearchInput"
@@ -14,7 +14,8 @@ export const Navbar = () => {
 
   const { isOpen, toggle, close } = useModal()
 
-  const isLogged = true
+  const isLogged = false
+  const [text, setText] = useState("")
 
   return (
     <>

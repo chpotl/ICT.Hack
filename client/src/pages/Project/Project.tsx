@@ -1,9 +1,13 @@
 import React from "react"
+import { useQuery } from "react-query"
+import { useParams } from "react-router"
 import { Avatar } from "../../components/Avatar/Avatar"
 import { Button } from "../../components/Buttons/Button"
 import { LinkButton } from "../../components/Buttons/LinkButton"
 import { Wrapper } from "../../components/Forms/Wrapper"
 import { Slider } from "../../components/Slider/Slider"
+import { ProjectService } from "../../services/project"
+import { NavLink } from "react-router-dom"
 
 export const Project = () => {
   const images = [
@@ -30,58 +34,75 @@ export const Project = () => {
     },
   ]
 
+  const { id } = useParams()
+
+  const { data, isError, isLoading } = useQuery(
+    ["project"],
+    () => ProjectService.getById(id),
+    {
+      select: (data) => data.project,
+    }
+  )
+
   return (
     <Wrapper>
-      <Slider images={images} />
+      <Slider images={data?.screenShotsUrl} />
       <div className='grid grid-cols-[1fr__0.6fr] gap-5 mt-5'>
         <section>
           <div className='flex flex-col gap-y-3'>
-            <h1 className='font-bold text-5xl'>Trade Court</h1>
+            <h1 className='font-bold text-5xl'>{data?.name}</h1>
 
-            <p className='font-normal text-xl'>
-              A decentralized multichain peer-to-peer platform that provides
-              users ability to easily exchange fiat to cryptocurrency
-            </p>
+            <p className='font-normal text-xl'>{data?.shortDescription}</p>
           </div>
           <div className='flex gap-x-5 items-center mt-[10px]'>
-            <LinkButton
+            {/* {/* <LinkButton
               title={"Презентация"}
               className={"p-[20px] py-[10px] text-white"}
-              url={""}
-            />
-            <LinkButton
+              url=
+            /> */}
+            {/* <LinkButton
               title={"Demo"}
               className={"p-[20px] py-[10px] text-black bg-white"}
-              url={""}
-            />
+              url={data?.demoUrl || ""}
+            /> */}
+
+            <a target={"_blank"} href={data?.presentationUrl}>
+              <div
+                className={`p-[20px] py-[10px] font-bold text-2xl border rounded-[10px] border-lightGray`}
+              >
+                <span className='text-white'>Презентация</span>
+              </div>
+            </a>
+
+            <a target={"_blank"} href={data?.demoUrl}>
+              <div
+                className={`p-[20px] py-[10px] font-bold text-2xl border rounded-[10px] border-lightGray bg-white`}
+              >
+                <span className='text-black'>Demo</span>
+              </div>
+            </a>
           </div>
 
           <div className='mt-5'>
             <h2 className='font-bold text-2xl'>Описание</h2>
-            <p>
-              This project combines blockchain technologies with complex
-              front-end and backend logic in order to provide save and anonymous
-              platform for conversion crypto assets to real world money. Our
-              platform helps new users easily send their fiat money and receive
-              cryptocurrency instantly without restrictions by centralized
-              exchanges. Lorem Ipsum is simply dummy text centuries, but also
-              the leap into
-            </p>
+            <p>{data?.longDescription}</p>
           </div>
         </section>
 
         <section>
           <Wrapper>
             <div className='flex flex-col'>
-              <span className='font-bold text-[32px]'>~ 60 000 р.</span>
+              <span className='font-bold text-[32px]'>
+                ~ {data?.investments} р.
+              </span>
               <span>полученные инвестиции</span>
             </div>
             <div className='mt-5'>
               <span className='text-2xl font-normal'>Команда</span>
               <div className='flex flex-wrap gap-5 mt-[10px]'>
-                {team.map((person) => (
+                {/* {data?.teamMembers.map((person) => (
                   <Avatar person={person} />
-                ))}
+                ))} */}
               </div>
             </div>
           </Wrapper>

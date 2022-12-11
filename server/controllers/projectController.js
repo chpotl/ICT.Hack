@@ -1,60 +1,60 @@
-const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
-const Project = require('../models/projectModel');
-const Tag = require('../models/tagModel');
+const AppError = require("../utils/appError")
+const catchAsync = require("../utils/catchAsync")
+const Project = require("../models/projectModel")
+const Tag = require("../models/tagModel")
 
 exports.getAll = catchAsync(async (req, res, next) => {
-  const page = +req.query.page || 1;
-  const limit = +req.query.limit || 10;
-  const tagsReq = req.query.tags;
-  const regionsReq = req.query.regions;
-  const categoryReq = req.query.category;
-  const minInvest = req.query.minInvest || 0;
-  const maxInvest = req.query.maxInvest || Infinity;
-  let match = {};
-  console.log(req.query);
+  const page = +req.query.page || 1
+  const limit = +req.query.limit || 10
+  const tagsReq = req.query.tags
+  const regionsReq = req.query.regions
+  const categoryReq = req.query.category
+  const minInvest = req.query.minInvest || 0
+  const maxInvest = req.query.maxInvest || Infinity
+  let match = {}
+  console.log(req.query)
   if (categoryReq) {
-    match.category = categoryReq;
+    match.category = categoryReq
   }
   if (tagsReq) {
-    const tagsArr = tagsReq.split(',').map((el) => {
-      return { tags: el };
-    });
-    match.$or = tagsArr;
+    const tagsArr = tagsReq.split(",").map((el) => {
+      return { tags: el }
+    })
+    match.$or = tagsArr
   }
   if (regionsReq) {
-    const regionsArr = regionsReq.split(',').map((el) => {
-      return { region: el };
-    });
-    match.$or = regionsArr;
+    const regionsArr = regionsReq.split(",").map((el) => {
+      return { region: el }
+    })
+    match.$or = regionsArr
   }
   match.$and = [
     { investments: { $gte: minInvest } },
     { investments: { $lte: maxInvest } },
-  ];
+  ]
   const projects = await Project.find(match)
-    .populate('category creator')
+    .populate("category creator")
     .limit(limit)
-    .skip((page - 1) * limit);
+    .skip((page - 1) * limit)
   res.status(200).json({
-    message: 'success',
+    message: "success",
     found: projects.length,
     projects,
-  });
-});
+  })
+})
 
 exports.getById = catchAsync(async (req, res, next) => {
   const project = await Project.findById(req.params.projectId).populate(
-    'category creator teamMembers'
-  );
+    "category creator teamMembers"
+  )
   if (!project) {
-    return next(new AppError('No such project', 404));
+    return next(new AppError("No such project", 404))
   }
   res.status(200).json({
-    message: 'success',
+    message: "success",
     project,
-  });
-});
+  })
+})
 
 exports.create = catchAsync(async (req, res, next) => {
   const newProject = await Project.create({
@@ -73,19 +73,19 @@ exports.create = catchAsync(async (req, res, next) => {
     creator: req.user._id,
     region: req.body.region,
     investments: req.body.investments,
-  });
+  })
   if (req.body.tags) {
-    const tags = req.body.tags;
+    const tags = req.body.tags
     tags.forEach(async (tag) => {
       return await Tag.findOneAndUpdate(
         { name: tag },
         { name: tag },
         { upsert: true }
-      );
-    });
+      )
+    })
   }
   res.status(200).json({
-    message: 'success',
+    message: "success",
     newProject,
-  });
-});
+  })
+})
