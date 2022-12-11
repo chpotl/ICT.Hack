@@ -45,7 +45,7 @@ exports.getAll = catchAsync(async (req, res, next) => {
 
 exports.getById = catchAsync(async (req, res, next) => {
   const project = await Project.findById(req.params.projectId).populate(
-    "category creator"
+    "category creator teamMembers"
   )
   if (!project) {
     return next(new AppError("No such project", 404))
