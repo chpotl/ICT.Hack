@@ -21,7 +21,7 @@ exports.getTagtrendIndex = catchAsync(async (req, res, next) => {
     return statArray[statArray.length - 1].value[0] / 100;
   });
   const indexesArr = await Promise.all(mainIndexArr);
-  const data = avg(indexesArr);
+  const data = avg(indexesArr) * 100;
   res.status(200).json({
     message: 'success',
     data,
