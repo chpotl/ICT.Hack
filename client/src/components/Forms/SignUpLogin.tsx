@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Inputs/TextInput"
 import { useFormik } from "formik"
@@ -12,7 +12,10 @@ interface ISignUpLogin {
 }
 
 export const SignUpLogin = () => {
-  const mutation = useMutation((user) => UserService.register(user))
+  const registerUser = useMutation((user) => UserService.register(user))
+  const loginUser = useMutation((user) => UserService.login(user))
+
+  const [loginOrSign, setLoginOrSign] = useState<"login" | "sign">("sign")
 
   const initialValues: ISignUpLogin = {
     email: "",
@@ -30,10 +33,17 @@ export const SignUpLogin = () => {
       console.log("form submitted")
       console.log(values)
 
-      mutation.mutate({
-        email: formik.values.email,
-        password: formik.values.password,
-      })
+      if (loginOrSign === "sign") {
+        registerUser.mutateAsync({
+          email: formik.values.email,
+          password: formik.values.password,
+        })
+      } else {
+        loginUser.mutateAsync({
+          email: formik.values.email,
+          password: formik.values.password,
+        })
+      }
     },
   })
 
@@ -41,7 +51,26 @@ export const SignUpLogin = () => {
     <form onSubmit={formik.handleSubmit} className='px-10'>
       <div className='flex flex-col items-center mb-5'>
         <h1 className='font-bold text-4xl mb-[10px]'>
-          Создать/Войти в профиль
+          <button
+            type='button'
+            className={`${
+              loginOrSign === "sign" ? "text-darkGreen" : "text-lightGray"
+            }`}
+            onClick={() => setLoginOrSign("sign")}
+          >
+            Создать
+          </button>
+          /
+          <button
+            type='button'
+            className={`${
+              loginOrSign === "login" ? "text-darkGreen" : "text-lightGray"
+            }`}
+            onClick={() => setLoginOrSign("login")}
+          >
+            Войти
+          </button>{" "}
+          в профиль
         </h1>
         <h2 className='font-normal text-lightGray'>
           Доступ к бесконечным возможностям
@@ -68,7 +97,7 @@ export const SignUpLogin = () => {
 
         <Button
           type='submit'
-          title={"Создать"}
+          title={`${loginOrSign === "login" ? "Войти" : "Создать"}`}
           className='py-5 bg-darkGreen rounded-[20px]'
         />
       </div>
