@@ -33,13 +33,26 @@ exports.getAll = catchAsync(async (req, res, next) => {
     { investments: { $lte: maxInvest } },
   ];
   const projects = await Project.find(match)
-    .populate('category')
+    .populate('category creator')
     .limit(limit)
     .skip((page - 1) * limit);
   res.status(200).json({
     message: 'success',
     found: projects.length,
     projects,
+  });
+});
+
+exports.getById = catchAsync(async (req, res, next) => {
+  const project = await Project.findById(req.params.projectId).populate(
+    'category creator'
+  );
+  if (!project) {
+    return next(new AppError('No such project', 404));
+  }
+  res.status(200).json({
+    message: 'success',
+    project,
   });
 });
 
