@@ -14,8 +14,7 @@ export const Navbar = () => {
 
   const { isOpen, toggle, close } = useModal()
 
-  const isLogged = false
-  const [text, setText] = useState("")
+  const isLogged = true
 
   return (
     <>

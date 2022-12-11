@@ -31,6 +31,8 @@ export interface IProject {
   creator: ICreator
   demoUrl: string
   region: string
+  walletAddress: string
+  trendIndex: number
 }
 
 export interface ISignUpLogin {

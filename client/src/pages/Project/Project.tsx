@@ -40,7 +40,7 @@ export const Project = () => {
 
   const { config } = usePrepareSendTransaction({
     request: {
-      to: "",
+      to: data?.walletAddress || "",
       value: BigNumber.from(
         amount != "" ? ethers.utils.parseEther(amount) : "0"
       ),
@@ -57,11 +57,6 @@ export const Project = () => {
 
   const handleSetAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value)
-  }
-
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    sendTransaction?.()
   }
 
   return (
@@ -144,17 +139,13 @@ export const Project = () => {
       </div>
       <Modal isOpen={isOpen} closeModal={close}>
         <div className='flex items-center flex-col gap-y-5'>
-          <span className='text-2xl font-bold text-center'>
-            Поддержите проект переведя криптовалюту на адрес кошелька
+          <span className='text-4xl font-bold text-center'>
+            Быстрая инвестиция
           </span>
           <ConnectButton />
           {isConnected && (
             <>
-              <form
-                id='sendTokens'
-                onSubmit={handleOnSubmit}
-                className='flex items-center border border-lightGray bg-lightBlack rounded-[20px]'
-              >
+              <div className='flex items-center border border-lightGray bg-lightBlack rounded-[20px]'>
                 <input
                   type={"number"}
                   name={"tokens"}
@@ -165,11 +156,11 @@ export const Project = () => {
                 />
 
                 <div className='pr-5 font-bold text-xl'>ETH</div>
-              </form>
+              </div>
 
               <button
-                form='sendTokens'
-                type='submit'
+                onClick={() => sendTransaction?.()}
+                // disabled={!sendTransaction}
                 className={`font-bold text-2xl border-none text-black p-5 bg-darkGreen rounded-[20px]`}
               >
                 Поддержать

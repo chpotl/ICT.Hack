@@ -10,8 +10,18 @@ interface Props {
 }
 
 export const Project: FC<Props> = ({ project }) => {
+  const trendColorSwitch = (trendIndex: number) => {
+    if (trendIndex >= 50) {
+      return "text-[#F0B909]"
+    }
+    if (trendIndex > 80) {
+      return "text-lightGreen"
+    }
+    return "text-[#FF2E2E]"
+  }
+
   return (
-    <div className='border border-lightGray rounded-[20px] overflow-hidden '>
+    <div className='border border-lightGray rounded-[20px] overflow-hidden'>
       {/* hover:scale-105 transition-transform duration-500 easy-in-out */}
       <img src={project.logoUrl} className='h-60 w-full object-cover' />
 
@@ -28,17 +38,25 @@ export const Project: FC<Props> = ({ project }) => {
             <span className='text-darkGreen'>@{project.creator.username}</span>
           </span>
         </div>
-        <div className='break-words'>
-          <p>{project.shortDescription?.slice(0, 100)}...</p>
+        <div className='flex gap-x-2 items-center'>
+          <span
+            className={`font-bold text-[32px] ${trendColorSwitch(
+              project.trendIndex
+            )}`}
+          >
+            {project.trendIndex}
+          </span>
+          индекс тренда
         </div>
-
+        <div className='break-words'>
+          {project.shortDescription?.slice(0, 100)}...
+        </div>
         <div className='flex flex-col mb-[13px]'>
           <span className='text-[32px] font-bold'>
             ~ {project.investments} р.
           </span>
           <span>полученные инвестиции</span>
         </div>
-
         <LinkButton
           title={"Подробнее"}
           className={
