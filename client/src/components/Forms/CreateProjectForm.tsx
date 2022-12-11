@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button } from "../Buttons/Button"
 import { SkillButton } from "../Buttons/SkillButton"
 import { Dropdown } from "../Dropdowns/Dropdown"
@@ -10,17 +10,44 @@ import { Form } from "./Form"
 import { Label } from "./Label"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { IProject } from "../../types/types"
+import { EnterInput } from "../Inputs/EnterInput"
 
 export const CreateProjectForm = () => {
-  const tags = ["web3", "скам"]
-  const team = ["@chpotl", "@ke1axaw"]
+  const [tags, setTags] = useState<string[]>([])
+  const [team, setTeam] = useState<string[]>([])
 
-  const initialValues = {}
+  type InitialValues = Omit<IProject, "creator">
+
+  const initialValues: InitialValues = {
+    _id: "",
+    name: "",
+    category: {
+      name: "",
+      _id: "",
+    },
+    tags: [],
+    shortDescription: "",
+    longDescription: "",
+    investments: 0,
+    webSite: "",
+    logoUrl: "",
+    coverUrl: "",
+    presentationUrl: "",
+    screenShotsUrl: [],
+    teamMembers: [],
+    moderated: false,
+    demoUrl: "",
+    region: "",
+  }
 
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({}),
-    onSubmit: () => {},
+    onSubmit: () => {
+      console.log(formik.errors)
+      console.log(formik.values)
+    },
   })
 
   return (
@@ -28,8 +55,9 @@ export const CreateProjectForm = () => {
       <WrapperTitle title='Общие данные'>
         <LabelInput
           required={true}
-          value={""}
-          setValue={() => {}}
+          name={"name"}
+          value={formik.values.name}
+          setValue={formik.handleChange}
           placeholder={"мой крутой проект"}
           type={"text"}
           label='Название проекта'
@@ -39,24 +67,12 @@ export const CreateProjectForm = () => {
           <Dropdown title='Категория' data={["1", "2", "3"]} />
         </Label>
 
-        <div>
-          <LabelInput
-            required={true}
-            value={""}
-            setValue={() => {}}
-            placeholder={"Теги проекта"}
-            type={"text"}
-            label='Теги'
-          />
-
-          <span className='text-gray'>нажмите Enter после ввода навыка</span>
-        </div>
-
-        <div className='flex flex-wrap gap-2 w-full'>
-          {tags.map((tag, i) => (
-            <SkillButton title={tag} key={i} />
-          ))}
-        </div>
+        <EnterInput
+          selectors={tags}
+          setSelectors={setTags}
+          label={"Теги"}
+          placeholder={"теги проекта"}
+        />
       </WrapperTitle>
 
       <WrapperTitle title='Описание проекта'>
@@ -87,24 +103,12 @@ export const CreateProjectForm = () => {
           label='Сайт проекта'
         />
 
-        <div>
-          <LabelInput
-            required={true}
-            value={""}
-            setValue={() => {}}
-            placeholder={"имя пользователя"}
-            type={"text"}
-            label='Команда'
-          />
-
-          <span className='text-gray'>нажмите Enter после ввода навыка</span>
-        </div>
-
-        <div className='flex flex-wrap gap-2 w-full'>
-          {team.map((person, i) => (
-            <SkillButton title={person} key={i} />
-          ))}
-        </div>
+        <EnterInput
+          selectors={team}
+          setSelectors={setTeam}
+          label={"Команда"}
+          placeholder={"имя пользователя"}
+        />
       </WrapperTitle>
 
       <WrapperTitle title='Презентация'>
@@ -149,10 +153,10 @@ export const CreateProjectForm = () => {
           onClick={() => {}}
         />
         <Button
-          type='button'
+          type='reset'
           title={"Очистить все"}
           className={"py-[16px] text-black bg-white rounded-[20px] px-14"}
-          onClick={() => {}}
+          onClick={() => formik.resetForm()}
         />
       </div>
     </Form>

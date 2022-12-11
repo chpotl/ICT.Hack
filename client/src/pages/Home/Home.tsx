@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { Dropdown } from "../../components/Dropdowns/Dropdown"
 import { Filters } from "../../components/Filters/Filters"
+import { SignUpLogin } from "../../components/Modals/SignUpLogin"
 import { Project } from "../../components/Project/Project"
 import { ProjectsList } from "../../components/ProjectsList/ProjectsList"
 
