@@ -8,17 +8,26 @@ import { TextArea } from "../Inputs/TextArea"
 import { WrapperTitle } from "../Profile/WrapperTitle"
 import { Form } from "./Form"
 import { Label } from "./Label"
+import { useFormik } from "formik"
+import * as Yup from "yup"
 
 export const CreateProjectForm = () => {
-  const onSubmit = () => {}
-
   const tags = ["web3", "скам"]
   const team = ["@chpotl", "@ke1axaw"]
 
+  const initialValues = {}
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: Yup.object({}),
+    onSubmit: () => {},
+  })
+
   return (
-    <Form title={"Создать проект"} onSubmit={onSubmit}>
+    <Form title={"Создать проект"} onSubmit={formik.handleSubmit}>
       <WrapperTitle title='Общие данные'>
         <LabelInput
+          required={true}
           value={""}
           setValue={() => {}}
           placeholder={"мой крутой проект"}
@@ -26,12 +35,13 @@ export const CreateProjectForm = () => {
           label='Название проекта'
         />
 
-        <Label label={"Категория"}>
+        <Label required={true} label={"Категория"}>
           <Dropdown title='Категория' data={["1", "2", "3"]} />
         </Label>
 
         <div>
           <LabelInput
+            required={true}
             value={""}
             setValue={() => {}}
             placeholder={"Теги проекта"}
@@ -51,6 +61,7 @@ export const CreateProjectForm = () => {
 
       <WrapperTitle title='Описание проекта'>
         <TextArea
+          required={true}
           maxLength={280}
           label={"Короткое описание"}
           value={""}
@@ -58,6 +69,7 @@ export const CreateProjectForm = () => {
           placeholder={"Платформа для привлечения инвестиций стартапами"}
         />
         <TextArea
+          required={true}
           maxLength={600}
           label={"Полное описание"}
           value={""}
@@ -67,6 +79,7 @@ export const CreateProjectForm = () => {
           }
         />
         <LabelInput
+          required={false}
           value={""}
           setValue={() => {}}
           placeholder={"https://hooli.com"}
@@ -76,11 +89,12 @@ export const CreateProjectForm = () => {
 
         <div>
           <LabelInput
+            required={true}
             value={""}
             setValue={() => {}}
-            placeholder={"Теги проекта"}
+            placeholder={"имя пользователя"}
             type={"text"}
-            label='Теги'
+            label='Команда'
           />
 
           <span className='text-gray'>нажмите Enter после ввода навыка</span>
@@ -95,18 +109,18 @@ export const CreateProjectForm = () => {
 
       <WrapperTitle title='Презентация'>
         <div className='flex space-x-2'>
-          <Label label='Логотип'>
+          <Label required={true} label='Логотип'>
             <DownloadInput />
           </Label>
-          <Label label='Обложка'>
+          <Label required={true} label='Обложка'>
             <DownloadInput />
           </Label>
         </div>
-        <Label label='Презентация'>
+        <Label required={true} label='Презентация'>
           <DownloadInput />
         </Label>
         <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5'>
-          <Label label='Скриншоты'>
+          <Label required={true} label='Скриншоты'>
             <DownloadInput />
           </Label>
           <Label label=''>

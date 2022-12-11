@@ -13,12 +13,13 @@ export const TextArea: FC<ITextArea> = ({
   placeholder,
   label,
   maxLength,
+  required,
 }) => {
   return (
     <label className='w-full'>
       <div className='w-full flex justify-between'>
         <span className='font-bold text-xl'>
-          {label} <span className='text-darkGreen'>*</span>
+          {label} {required && <span className='text-darkGreen'>*</span>}
         </span>
         <span>Максимальное число символов: {maxLength}</span>
       </div>

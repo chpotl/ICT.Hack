@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes, FC } from "react"
 type TButton = {
   title: string
   className: string
-  onClick: () => void
+  onClick?: () => void
   type?: "button" | "reset" | "submit" | undefined
 }
 

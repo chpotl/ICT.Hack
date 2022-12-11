@@ -8,12 +8,10 @@ interface Props {
 
 export const NavLink: FC<Props> = ({ navlink }) => {
   return (
-    <Link to={""}>
-      <div className='flex space-x-2 justify-between items-center w-full border'>
+    <Link to={navlink.route}>
+      <div className='flex p-5 space-x-2 items-center w-full hover:bg-hovLightBlack rounded-xl transition-colors duration-500 ease-out'>
         {navlink.logo}
-        <div className='flex justify-start w-full'>
-          <span className='text-sm font-normal'>{navlink.title}</span>
-        </div>
+        <span className='text-base font-normal'>{navlink.title}</span>
       </div>
     </Link>
   )
