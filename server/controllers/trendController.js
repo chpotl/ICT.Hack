@@ -27,3 +27,14 @@ exports.getTagtrendIndex = catchAsync(async (req, res, next) => {
     data,
   });
 });
+
+exports.getIndex = async (tagsArr) => {
+  const mainIndexArr = tagsArr.map(async (tag) => {
+    const result = await googleTrends.interestOverTime({ keyword: tag });
+    const statArray = JSON.parse(result).default.timelineData;
+    return statArray[statArray.length - 1].value[0] / 100;
+  });
+  const indexesArr = await Promise.all(mainIndexArr);
+  const data = avg(indexesArr) * 100;
+  return data;
+};
