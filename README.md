@@ -91,9 +91,13 @@ CV (возможность этого доступа должна настраи
 <h1> Результаты </h1>
 
 <h2> Название команды: smartkontora </h2>
-[!alt text](https://github.com/smartkontora/ICT.Hack-V/blob/main/results.png)
+<img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide1.png' />
 
 <h1> Презентация </h1>
 <img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide1.png' />
+<img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide2.png' />
+<img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide3.png' />
+<img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide4.png' />
+<img src='https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide5.png' />
 
 
