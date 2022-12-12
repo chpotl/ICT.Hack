@@ -92,7 +92,7 @@ CV (возможность этого доступа должна настраи
 
 <h2> Название команды: smartkontora </h2>
 
-![alt text](https://github.com/smartkontora/ICT.Hack-V/blob/main/results.png)
+[logo](https://github.com/smartkontora/ICT.Hack-V/blob/main/results.png)
 
 <h1> Презентация </h1>
 ![alt text](https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide1.png)
