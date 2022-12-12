@@ -95,6 +95,7 @@ CV (возможность этого доступа должна настраи
 ![alt text](https://github.com/kelaxaw/ICT.Hack-V/blob/main/results.png)
 
 <h1> Презентация </h1>
+![alt text](https://github.com/kelaxaw/ICT.Hack-V/blob/main/results.png)
 ![alt text](https://github.com/kelaxaw/ICT.Hack-V/blob/main/presentation/slide%201.png)
 <!-- ![alt text](https://github.com/kelaxaw/ICT.Hack-V/blob/main/presentation/slide%202.png)
 ![alt text](https://github.com/kelaxaw/ICT.Hack-V/blob/main/presentation/slide%203.png)
