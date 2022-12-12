@@ -95,4 +95,5 @@ CV (возможность этого доступа должна настраи
 ![alt text](https://github.com/smartkontora/ICT.Hack-V/blob/main/results.png)
 
 <h1> Презентация </h1>
+![alt text](https://github.com/smartkontora/ICT.Hack-V/blob/main/presentation/slide%201.png)
 
