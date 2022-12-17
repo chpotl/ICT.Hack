@@ -44,8 +44,8 @@ export const Home = () => {
   }, [activeTag, activeCategory])
 
   return (
-    <div className='grid grid-cols-[20%__80%] gap-5 p-5'>
-      <aside className='bg-lightBlack p-5 rounded-[20px] border border-gray flex flex-col gap-y-5'>
+    <div className='sm:grid sm:grid-cols-[20%__80%] gap-5'>
+      <aside className='bg-lightBlack p-5 rounded-[20px] border border-gray flex-col gap-y-5 sm:flex hidden'>
         <Dropdown
           select={activeCategory}
           onSelect={setActiveCategory}

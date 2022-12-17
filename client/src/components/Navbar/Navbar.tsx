@@ -25,7 +25,6 @@ export const Navbar = () => {
         <div className='flex items-center space-x-10'>
           <Links />
 
-          {/* <div className='relative'> */}
           {isLogged ? (
             <div className='relative'>
               <Profile setMenuOpened={setMenuOpened} isMenuOpen={isMenuOpen} />
@@ -38,7 +37,6 @@ export const Navbar = () => {
               className='bg-darkGreen px-5 py-[15px] rounded-[20px]'
             />
           )}
-          {/* </div> */}
         </div>
       </nav>
 

@@ -57,7 +57,7 @@ export const Menu = () => {
   ]
 
   return (
-    <div className='bg-lightBlack w-[300px] rounded-[20px] border-2 border-lightGray right-5 flex flex-col justify-start  p-5 absolute'>
+    <div className='bg-lightBlack w-[20vw] rounded-[20px] border-2 border-lightGray right-5 flex flex-col justify-start  p-5 absolute'>
       {navlinks.map((navlink) => (
         <NavLink navlink={navlink} key={navlink.title} />
       ))}

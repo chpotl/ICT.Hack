@@ -2,21 +2,22 @@ import React, { FC, useState } from "react"
 import { Arrow } from "../Icons/Arrow"
 import { DropdownOption } from "./DropdownOption"
 
-type TDropdown = {
+interface Props<T> {
   title: string
-  data: any[]
+  data: T[] | undefined
   selectOption: string
   option: string
+  select: string
   onSelect: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const Dropdown: FC<TDropdown> = ({
+export const Dropdown = <T,>({
   selectOption,
   title,
   data,
   onSelect,
   select,
-}) => {
+}: Props<T>) => {
   const [isOpened, setIsOpened] = useState(false)
 
   const handleOpenDropdown = () => {
