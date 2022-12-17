@@ -1,15 +1,7 @@
-import React, { FC, useState } from "react"
+import { useState } from "react"
 import { Arrow } from "../Icons/Arrow"
-import { DropdownOption } from "./DropdownOption"
-
-interface Props<T> {
-  title: string
-  data: T[] | undefined
-  selectOption: string
-  option: string
-  select: string
-  onSelect: React.Dispatch<React.SetStateAction<string>>
-}
+import { DropdownItem } from "./DropdownItem"
+import { IDropdown } from "../../types/types"
 
 export const Dropdown = <T,>({
   selectOption,
@@ -17,7 +9,7 @@ export const Dropdown = <T,>({
   data,
   onSelect,
   select,
-}: Props<T>) => {
+}: IDropdown<T>) => {
   const [isOpened, setIsOpened] = useState(false)
 
   const handleOpenDropdown = () => {
@@ -43,14 +35,17 @@ export const Dropdown = <T,>({
       {isOpened && (
         <div className='flex flex-col gap-y-2'>
           {data
-            ? data.map((option) => (
-                <DropdownOption
-                  select={select}
-                  selectOption={option[selectOption]}
-                  onSelect={onSelect}
-                  name={option.name}
-                />
-              ))
+            ? data.map((item, i) => {
+                return (
+                  <DropdownItem
+                    select={select}
+                    selectOption={item[selectOption]}
+                    onSelect={onSelect}
+                    name={item.name}
+                    key={i}
+                  />
+                )
+              })
             : null}
         </div>
       )}

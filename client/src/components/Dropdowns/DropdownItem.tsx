@@ -1,13 +1,13 @@
 import React, { FC } from "react"
 
-interface Props {
+export interface IDropdownItem {
   name: string
   onSelect: React.Dispatch<React.SetStateAction<string>>
   select: string
   selectOption: string
 }
 
-export const DropdownOption: FC<Props> = ({
+export const DropdownItem: FC<IDropdownItem> = ({
   name,
   onSelect,
   select,

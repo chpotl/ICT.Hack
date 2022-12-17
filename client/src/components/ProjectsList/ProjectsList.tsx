@@ -1,16 +1,24 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
-import { IProject } from "../../types/types"
 import { Project } from "../Project/Project"
+import { IInitialFilters } from "../../pages/Home/Home"
 
 interface Props {
-  projects: IProject[] | undefined
+  filters: IInitialFilters
 }
 
-export const ProjectsList: FC<Props> = ({ projects }) => {
+export const ProjectsList: FC<Props> = ({ filters }) => {
+  const {
+    data: projects,
+    isError,
+    isLoading,
+  } = useQuery(["projects", filters], () => ProjectService.getAll(filters), {
+    select: (data) => data.projects,
+  })
+
   return (
-    <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pr-10'>
+    <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
       {projects?.length ? (
         projects?.map((project) => (
           <Project project={project} key={project._id} />

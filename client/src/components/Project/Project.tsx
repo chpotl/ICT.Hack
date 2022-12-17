@@ -29,9 +29,9 @@ export const Project: FC<Props> = ({ project }) => {
 
         <div className='flex flex-col p-5'>
           <div className='flex flex-wrap gap-2 mb-[10px]'>
-            {project.tags.map((tag) => (
-              <Tag title={tag} />
-            ))}
+            {project.tags.map((tag) => {
+              return <Tag title={tag} />
+            })}
           </div>
           <div className='flex flex-col mb-[10px]'>
             <span className='text-[32px] font-bold'>{project.name}</span>

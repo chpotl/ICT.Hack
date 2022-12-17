@@ -62,7 +62,7 @@ export const Project = () => {
   return (
     <Wrapper>
       <Slider images={data?.screenShotsUrl} />
-      <div className='grid grid-cols-[1fr__0.6fr] gap-5 mt-5'>
+      <div className='sm:grid grid-cols-[1fr__0.6fr] gap-5 mt-5'>
         <section>
           <div className='flex flex-col gap-y-3'>
             <h1 className='font-bold text-5xl'>{data?.name}</h1>

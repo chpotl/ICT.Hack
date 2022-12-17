@@ -16,7 +16,7 @@ export interface ICreator {
 export interface IProject {
   _id: string
   name: string
-  category: ICategory
+  category: ICategory[]
   tags: string[]
   shortDescription: string
   longDescription: string
@@ -78,4 +78,12 @@ export interface IUser {
   secondName: string
   avatarUrl: string
   coverUrl: string
+}
+
+export interface IDropdown<T> {
+  title: string
+  data: T[] | undefined
+  selectOption: string
+  select: string
+  onSelect: React.Dispatch<React.SetStateAction<string>>
 }

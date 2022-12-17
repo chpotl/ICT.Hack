@@ -15,9 +15,7 @@ type CategoryResponse = {
 }
 
 type TagsResponse = {
-  tag: {
-    name: string
-  }
+  tag: string[]
 }
 
 export const ProjectService = {
