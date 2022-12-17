@@ -1,11 +1,5 @@
-import { useEffect, useState } from "react"
-import { useQuery } from "react-query"
-import { Button } from "../../components/Buttons/Button"
-import { Dropdown } from "../../components/Dropdowns/Dropdown"
-import { Project } from "../../components/Project/Project"
+import { useState } from "react"
 import { ProjectsList } from "../../components/ProjectsList/ProjectsList"
-import { useFilters } from "../../hooks/useFiters"
-import { ProjectService } from "../../services/project"
 import { Filters } from "../../components/Filters/Filters"
 
 export interface IInitialFilters {
@@ -14,10 +8,6 @@ export interface IInitialFilters {
 }
 
 export const Home = () => {
-  // const [filters, setFilters] = useState<IInitialFilters>({
-  //   tags: "",
-  //   category: "",
-  // })
   const [tag, setTag] = useState("")
   const [category, setCategory] = useState("")
 
@@ -26,9 +16,8 @@ export const Home = () => {
     category,
   }
 
-  // sm:grid grid-cols-[0.24fr__1fr] gap-5
   return (
-    <>
+    <div className='flex justify-between gap-5'>
       <Filters
         tag={tag}
         category={category}
@@ -36,6 +25,6 @@ export const Home = () => {
         setTag={setTag}
       />
       <ProjectsList filters={filters} />
-    </>
+    </div>
   )
 }
