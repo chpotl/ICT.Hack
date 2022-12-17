@@ -21,16 +21,16 @@ export const Dropdown = <T,>({
   }`
 
   return (
-    <div className='p-[10px] rounded-[10px] cursor-pointer transition-colors duration-300'>
-      <div
+    <div className='rounded-[10px]'>
+      <button
         onClick={handleOpenDropdown}
-        className='flex justify-between w-full items-center'
+        className='flex justify-between w-full items-center p-[10px] transition-colors duration-300 rounded-[16px] hover:bg-hovLightBlack'
       >
         <span className='font-bold text-xl text-white'>{title}</span>
         <div className={isArrowRotate}>
           <Arrow />
         </div>
-      </div>
+      </button>
 
       {isOpened && (
         <div className='flex flex-col gap-y-2'>

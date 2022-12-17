@@ -14,15 +14,27 @@ export interface IInitialFilters {
 }
 
 export const Home = () => {
-  const [filters, setFilters] = useState<IInitialFilters>({
-    tags: "",
-    category: "",
-  })
+  // const [filters, setFilters] = useState<IInitialFilters>({
+  //   tags: "",
+  //   category: "",
+  // })
+  const [tag, setTag] = useState("")
+  const [category, setCategory] = useState("")
+
+  const filters = {
+    tags: tag,
+    category,
+  }
 
   // sm:grid grid-cols-[0.24fr__1fr] gap-5
   return (
     <>
-      <Filters setFilters={setFilters} />
+      <Filters
+        tag={tag}
+        category={category}
+        setCategory={setCategory}
+        setTag={setTag}
+      />
       <ProjectsList filters={filters} />
     </>
   )

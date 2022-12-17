@@ -3,22 +3,16 @@ import { Dropdown } from "../Dropdowns/Dropdown"
 import { useFilters } from "../../hooks/useFiters"
 import { IInitialFilters } from "../../pages/Home/Home"
 import { IDropdown } from "../../types/types"
+import { Button } from "../Buttons/Button"
 
 interface Props {
-  setFilters: React.Dispatch<React.SetStateAction<IInitialFilters>>
+  tag: string
+  category: string
+  setTag: React.Dispatch<React.SetStateAction<string>>
+  setCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const Filters: FC<Props> = ({ setFilters }) => {
-  const [tag, setTag] = useState("")
-  const [category, setCategory] = useState("")
-
-  useEffect(() => {
-    setFilters({
-      tags: tag,
-      category,
-    })
-  }, [tag, category])
-
+export const Filters: FC<Props> = ({ setCategory, setTag, tag, category }) => {
   const { categories, tags } = useFilters()
 
   const dropdowns: IDropdown<T>[] = [
@@ -41,11 +35,10 @@ export const Filters: FC<Props> = ({ setFilters }) => {
   const handleResetFilters = () => {
     setTag("")
     setCategory("")
-    setFilters({ tags: "", category: "" })
   }
 
   return (
-    <aside className='bg-lightBlack p-5 rounded-[20px] sticky top-0 overflow-y-auto border border-gray flex-col gap-y-5 sm:flex hidden h-[80vh] w-96'>
+    <aside className='bg-lightBlack p-5 rounded-[20px] overflow-y-auto border border-gray flex-col gap-y-5 sm:flex hidden h-[80vh] w-[20vw] sticky top-0'>
       {dropdowns.map((dropdown) => (
         <Dropdown
           select={dropdown.select}
@@ -56,7 +49,11 @@ export const Filters: FC<Props> = ({ setFilters }) => {
           key={dropdown.title}
         />
       ))}
-      <button onClick={handleResetFilters}>Сбросить</button>
+      <Button
+        title={"Сбросить"}
+        className={"bg-mainGreen rounded-[16px] p-2 w-full"}
+        onClick={handleResetFilters}
+      />
     </aside>
   )
 }

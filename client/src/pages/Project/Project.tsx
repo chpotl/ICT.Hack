@@ -70,17 +70,6 @@ export const Project = () => {
             <p className='font-normal text-xl'>{data?.shortDescription}</p>
           </div>
           <div className='flex gap-x-5 items-center mt-[10px]'>
-            {/* {/* <LinkButton
-              title={"Презентация"}
-              className={"p-[20px] py-[10px] text-white"}
-              url=
-            /> */}
-            {/* <LinkButton
-              title={"Demo"}
-              className={"p-[20px] py-[10px] text-black bg-white"}
-              url={data?.demoUrl || ""}
-            /> */}
-
             <a target={"_blank"} href={data?.presentationUrl}>
               <div
                 className={`p-[20px] py-[10px] font-bold text-2xl border rounded-[10px] border-lightGray`}
