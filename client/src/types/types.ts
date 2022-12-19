@@ -83,11 +83,12 @@ export interface IUser {
 }
 
 export interface IDropdown<T> {
-  title: string
-  data: T[] | undefined
-  selectOption: string
-  select: string
-  onSelect: React.Dispatch<React.SetStateAction<string>>
+  activeOption: string
+  placeholder: string
+  options: T[] | undefined
+  onChange: React.Dispatch<React.SetStateAction<string>>
+  selection?: string
+  optionSelection?: string
 }
 
 export interface ITextInput {

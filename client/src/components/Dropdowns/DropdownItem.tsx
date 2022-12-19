@@ -1,28 +1,39 @@
 import React, { FC } from "react"
 
 export interface IDropdownItem {
-  name: string
-  onSelect: React.Dispatch<React.SetStateAction<string>>
-  select: string
-  selectOption: string
+  option: any
+  onClick: React.Dispatch<React.SetStateAction<string>>
+  activeOption: string
+  selection?: string
+  optionSelection?: string
 }
 
 export const DropdownItem: FC<IDropdownItem> = ({
-  name,
-  onSelect,
-  select,
-  selectOption,
+  option,
+  onClick,
+  selection,
+  optionSelection,
+  activeOption,
 }) => {
+  const handleChange = () => {
+    if (selection) {
+      onClick(option[selection])
+    } else {
+      onClick(option)
+    }
+  }
+
   return (
     <button
-      onClick={() => onSelect(selectOption)}
+      onClick={handleChange}
       className={`${
-        select === selectOption ? "" : "hover:bg-hovLightBlack"
-      } p-2 rounded-[10px] font-normal text-start ${
-        select === selectOption ? "bg-lightGreen text-black" : ""
-      }`}
+        activeOption === option[selection] || activeOption === option
+          ? "bg-lightGreen text-black"
+          : "hover:bg-hovLightBlack"
+      } p-2 rounded-[10px] font-normal text-start
+        `}
     >
-      {name}
+      {optionSelection ? option[optionSelection] : option}
     </button>
   )
 }

@@ -8,12 +8,12 @@ export interface IInitialFilters {
 }
 
 export const Home = () => {
-  const [tag, setTag] = useState("")
-  const [category, setCategory] = useState("")
+  const [tag, setTag] = useState<string>("")
+  const [category, setCategory] = useState<string>("")
 
   const filters = {
-    tags: tag,
-    category,
+    tags: tag || "",
+    category: category || "",
   }
 
   return (

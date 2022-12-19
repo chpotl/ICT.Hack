@@ -11,9 +11,10 @@ export const TextInput: FC<ITextInput> = ({
 }) => {
   return (
     <input
+      spellCheck='false'
       type={type}
       name={name}
-      className={`font-bold text-xl placeholder:text-lightGray text-white border border-lightGray bg-lightBlack p-[22px] w-full rounded-[20px] outline-none ${
+      className={`font-normal text-xl placeholder:text-lightGray text-white border border-lightGray bg-lightBlack px-[20px] py-[13px] w-full rounded-[20px] outline-none ${
         error ? "border-red-600" : ""
       }`}
       onChange={setValue}

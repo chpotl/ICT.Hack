@@ -4,11 +4,12 @@ import { DropdownItem } from "./DropdownItem"
 import { IDropdown } from "../../types/types"
 
 export const Dropdown = <T,>({
-  selectOption,
-  title,
-  data,
-  onSelect,
-  select,
+  options,
+  placeholder,
+  onChange,
+  selection,
+  optionSelection,
+  activeOption,
 }: IDropdown<T>) => {
   const [isOpened, setIsOpened] = useState(false)
 
@@ -26,7 +27,7 @@ export const Dropdown = <T,>({
         onClick={handleOpenDropdown}
         className='flex justify-between w-full items-center p-[10px] transition-colors duration-300 rounded-[16px] hover:bg-hovLightBlack'
       >
-        <span className='font-bold text-xl text-white'>{title}</span>
+        <span className='font-bold text-xl text-white'>{placeholder}</span>
         <div className={isArrowRotate}>
           <Arrow />
         </div>
@@ -34,15 +35,16 @@ export const Dropdown = <T,>({
 
       {isOpened && (
         <div className='flex flex-col gap-y-2'>
-          {data
-            ? data.map((item, i) => {
+          {options
+            ? options.map((option) => {
                 return (
                   <DropdownItem
-                    select={select}
-                    selectOption={item[selectOption]}
-                    onSelect={onSelect}
-                    name={item.name}
-                    key={i}
+                    activeOption={activeOption}
+                    selection={selection}
+                    optionSelection={optionSelection}
+                    option={option}
+                    onClick={onChange}
+                    key={option._id}
                   />
                 )
               })

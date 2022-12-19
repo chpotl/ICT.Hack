@@ -6,6 +6,7 @@ export const useFilters = () => {
     ["categories"],
     () => ProjectService.getCategories()
   )
+
   const { data: tags, status: tagsStatus } = useQuery(["tags"], () =>
     ProjectService.getTags()
   )

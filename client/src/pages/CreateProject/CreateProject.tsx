@@ -1,7 +1,4 @@
 import React, { useState } from "react"
-import { useFormik } from "formik"
-import * as Yup from "yup"
-import { IProject } from "../../types/types"
 import { Form } from "../../components/Forms/Form"
 import { EnterInput } from "../../components/Inputs/EnterInput"
 import { Label } from "../../components/Inputs/Label"
@@ -12,65 +9,44 @@ import { DownloadInput } from "../../components/Inputs/DownloadInput"
 import { Button } from "../../components/Buttons/Button"
 import { TextInput } from "../../components/Inputs/TextInput"
 import { Wrapper } from "../../components/Forms/Wrapper"
+import { useCreateProject } from "../../hooks/useCreateProject"
+import { useQuery } from "react-query"
+import { ProjectService } from "../../services/project"
 
 const CreateProject = () => {
   const [tags, setTags] = useState<string[]>([])
   const [team, setTeam] = useState<string[]>([])
 
-  type InitialValues = Omit<IProject, "creator">
-
-  const initialValues: InitialValues = {
-    _id: "",
-    name: "",
-    category: {
-      name: "",
-      _id: "",
-    },
-    tags: [],
-    shortDescription: "",
-    longDescription: "",
-    investments: 0,
-    webSite: "",
-    logoUrl: "",
-    coverUrl: "",
-    presentationUrl: "",
-    screenShotsUrl: [],
-    teamMembers: [],
-    moderated: false,
-    demoUrl: "",
-    region: "",
-  }
-
-  const formik = useFormik({
-    initialValues,
-    validationSchema: Yup.object({}),
-    onSubmit: () => {
-      console.log(formik.errors)
-      console.log(formik.values)
-    },
+  const {
+    data: categories,
+    isError,
+    isLoading,
+  } = useQuery(["categories"], () => ProjectService.getCategories(), {
+    select: (data) => data.category.map((category) => category.name),
   })
 
+  const { values, handleChange, handleSubmit, resetForm, setFieldValue } =
+    useCreateProject()
+
   return (
-    <Form title={"Создать проект"} onSubmit={formik.handleSubmit}>
+    <Form title={"Создать проект"} onSubmit={handleSubmit}>
       <Title title='Общие данные' />
       <Wrapper>
         <Label label={"Название проекта"} required>
           <TextInput
             name={"name"}
-            value={formik.values.name}
-            setValue={() => formik.handleChange}
+            value={values.name}
+            setValue={handleChange}
             placeholder={"мой крутой проект"}
             type={"text"}
           />
         </Label>
 
-        <Label required={true} label={"Категория"}>
+        <Label label={"Категория"} required>
           <Dropdown
-            title='Категория'
-            data={["1", "2", "3"]}
-            selectOption={""}
-            select={""}
-            onSelect={() => {}}
+            placeholder='Категория'
+            options={categories}
+            onChange={(value) => setFieldValue("category", value)}
           />
         </Label>
 
@@ -82,34 +58,46 @@ const CreateProject = () => {
             placeholder={"теги проекта"}
           />
         </Label>
+
+        <Label label='Инвестиции' required>
+          <TextInput
+            name={"investments"}
+            value={values.investments?.toString()}
+            setValue={handleChange}
+            placeholder={"сколько собрано инвестиций"}
+            type={"number"}
+          />
+        </Label>
       </Wrapper>
 
       <Title title='Описание проекта' />
       <Wrapper>
         <Label label='Короткое описание' required>
           <TextArea
+            name={"shortDescription"}
             maxLength={280}
-            value={""}
-            setValue={() => {}}
+            value={values.shortDescription}
+            setValue={handleChange}
             placeholder={"Платформа для привлечения инвестиций стартапами"}
           />
         </Label>
 
         <Label label='Полное описание' required>
           <TextArea
+            name={"longDescription"}
             maxLength={600}
-            value={""}
-            setValue={() => {}}
+            value={values.longDescription}
+            setValue={handleChange}
             placeholder={
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per ..."
             }
           />
         </Label>
-
         <Label label='Сайт проекта'>
           <TextInput
-            value={""}
-            setValue={() => {}}
+            name={"webSite"}
+            value={values.webSite}
+            setValue={handleChange}
             placeholder={"https://hooli.com"}
             type={"text"}
           />
@@ -120,7 +108,6 @@ const CreateProject = () => {
             enterTitle='нажмите Enter после ввода имени пользователя'
             selectors={team}
             setSelectors={setTeam}
-            label={"Команда"}
             placeholder={"имя пользователя"}
           />
         </Label>
@@ -154,13 +141,12 @@ const CreateProject = () => {
           type='submit'
           title={"Отправить на модерацию"}
           className={"py-[16px] text-black bg-darkGreen rounded-[20px] px-14"}
-          onClick={() => {}}
         />
         <Button
           type='reset'
           title={"Очистить все"}
           className={"py-[16px] text-black bg-white rounded-[20px] px-14"}
-          onClick={() => formik.resetForm()}
+          onClick={() => resetForm()}
         />
       </div>
     </Form>

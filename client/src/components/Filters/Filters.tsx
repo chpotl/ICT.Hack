@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { Dropdown } from "../Dropdowns/Dropdown"
 import { useFilters } from "../../hooks/useFiters"
-import { IInitialFilters } from "../../pages/Home/Home"
 import { IDropdown } from "../../types/types"
 import { Button } from "../Buttons/Button"
 
@@ -17,18 +16,20 @@ export const Filters: FC<Props> = ({ setCategory, setTag, tag, category }) => {
 
   const dropdowns: IDropdown<T>[] = [
     {
-      select: category,
-      onSelect: setCategory,
-      title: "Категория",
-      selectOption: "_id",
-      data: categories?.category,
+      activeOption: category,
+      placeholder: "Категория",
+      onChange: setCategory,
+      selection: "_id",
+      optionSelection: "name",
+      options: categories?.category,
     },
     {
-      select: tag,
-      onSelect: setTag,
-      title: "Теги",
-      selectOption: "name",
-      data: tags?.tag,
+      activeOption: tag,
+      placeholder: "Тег",
+      onChange: setTag,
+      selection: "name",
+      optionSelection: "name",
+      options: tags?.tag,
     },
   ]
 
@@ -41,12 +42,13 @@ export const Filters: FC<Props> = ({ setCategory, setTag, tag, category }) => {
     <aside className='bg-lightBlack p-5 rounded-[20px] overflow-y-auto border border-gray flex-col gap-y-5 sm:flex hidden h-[80vh] max-w-[500px] w-[500px] sticky top-5'>
       {dropdowns.map((dropdown) => (
         <Dropdown
-          select={dropdown.select}
-          onSelect={dropdown.onSelect}
-          title={dropdown.title}
-          selectOption={dropdown.selectOption}
-          data={dropdown.data}
-          key={dropdown.title}
+          activeOption={dropdown.activeOption}
+          optionSelection={dropdown.optionSelection}
+          selection={dropdown.selection}
+          options={dropdown.options}
+          onChange={dropdown.onChange}
+          placeholder={dropdown.placeholder}
+          key={dropdown.placeholder}
         />
       ))}
       <Button
