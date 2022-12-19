@@ -38,7 +38,7 @@ export const Filters: FC<Props> = ({ setCategory, setTag, tag, category }) => {
   }
 
   return (
-    <aside className='bg-lightBlack p-5 rounded-[20px] overflow-y-auto border border-gray flex-col gap-y-5 sm:flex hidden h-[80vh] w-[40%] sticky top-5'>
+    <aside className='bg-lightBlack p-5 rounded-[20px] overflow-y-auto border border-gray flex-col gap-y-5 sm:flex hidden h-[80vh] max-w-[500px] w-[500px] sticky top-5'>
       {dropdowns.map((dropdown) => (
         <Dropdown
           select={dropdown.select}

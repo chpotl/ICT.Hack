@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Inputs/TextInput"
 import { useFormik } from "formik"
@@ -11,11 +11,18 @@ interface ISignUpLogin {
   password: string
 }
 
-export const SignUpLogin = () => {
-  const registerUser = useMutation((user) => UserService.register(user))
-  const loginUser = useMutation((user) => UserService.login(user))
+interface Props {
+  setUser: React.Dispatch<React.SetStateAction<any>>
+  setToken: React.Dispatch<React.SetStateAction<string>>
+  close: () => void
+}
 
-  const [loginOrSign, setLoginOrSign] = useState<"login" | "sign">("sign")
+export const SignUpLogin: FC<Props> = ({ setUser, setToken, close }) => {
+  const [loginOrSign, setLoginOrSign] = useState<"login" | "signup">("signup")
+
+  const authUser = useMutation((user) =>
+    UserService.authUser(user, loginOrSign)
+  )
 
   const initialValues: ISignUpLogin = {
     email: "",
@@ -31,19 +38,18 @@ export const SignUpLogin = () => {
 
     onSubmit: (values) => {
       console.log("form submitted")
-      console.log(values)
 
-      if (loginOrSign === "sign") {
-        registerUser.mutateAsync({
+      authUser
+        .mutateAsync({
           email: formik.values.email,
           password: formik.values.password,
         })
-      } else {
-        loginUser.mutateAsync({
-          email: formik.values.email,
-          password: formik.values.password,
+        .then(({ data }) => {
+          console.log("data", data)
+          setToken(data.token)
+          setUser(data.data.user)
+          close()
         })
-      }
     },
   })
 
@@ -54,9 +60,9 @@ export const SignUpLogin = () => {
           <button
             type='button'
             className={`${
-              loginOrSign === "sign" ? "text-darkGreen" : "text-lightGray"
+              loginOrSign === "signup" ? "text-darkGreen" : "text-lightGray"
             }`}
-            onClick={() => setLoginOrSign("sign")}
+            onClick={() => setLoginOrSign("signup")}
           >
             Создать
           </button>

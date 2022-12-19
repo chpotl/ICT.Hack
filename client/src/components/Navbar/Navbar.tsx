@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { FC, useState } from "react"
 import { useModal } from "../../hooks/useModal"
 import { Button } from "../Buttons/Button"
 import { Logo } from "../Logo/Logo"
@@ -9,12 +9,21 @@ import { Profile } from "./Profile"
 import { SearchInput } from "../Search/SearchInput"
 import { Links } from "./Links"
 
-export const Navbar = () => {
+interface Props {
+  token: string | undefined
+  user: any
+  toggle: () => void
+  clearUser: () => void
+}
+
+export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
   const [isMenuOpen, setMenuOpened] = useState(false)
 
-  const { isOpen, toggle, close } = useModal()
+  // console.log("token", token)
 
-  const isLogged = true
+  const isLogged = token ? true : false
+
+  console.log("isLogged", isLogged)
 
   return (
     <>
@@ -27,8 +36,12 @@ export const Navbar = () => {
 
           {isLogged ? (
             <div className='relative'>
-              <Profile setMenuOpened={setMenuOpened} isMenuOpen={isMenuOpen} />
-              {isMenuOpen && <Menu />}
+              <Profile
+                user={user}
+                setMenuOpened={setMenuOpened}
+                isMenuOpen={isMenuOpen}
+              />
+              {isMenuOpen && <Menu clearUser={clearUser} />}
             </div>
           ) : (
             <Button
@@ -39,10 +52,6 @@ export const Navbar = () => {
           )}
         </div>
       </nav>
-
-      <Modal isOpen={isOpen} closeModal={close}>
-        <SignUpLogin />
-      </Modal>
     </>
   )
 }

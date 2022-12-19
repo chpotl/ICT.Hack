@@ -1,8 +1,6 @@
-import React, { FC } from "react"
-import photo from "../../assets/project_logo.png"
+import { FC } from "react"
 import { IProject } from "../../types/types"
 import { Button } from "../Buttons/Button"
-import { LinkButton } from "../Buttons/LinkButton"
 import { Tag } from "./Tag"
 import { Link } from "react-router-dom"
 

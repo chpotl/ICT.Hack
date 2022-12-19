@@ -12,14 +12,14 @@ export const Search = () => {
       <path
         d='M10.3514 19.7028C15.516 19.7028 19.7028 15.516 19.7028 10.3514C19.7028 5.18677 15.516 1 10.3514 1C5.18677 1 1 5.18677 1 10.3514C1 15.516 5.18677 19.7028 10.3514 19.7028Z'
         stroke='#FEFEF9'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M16.8599 17.3419L20.5256 21'
         stroke='#FEFEF9'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

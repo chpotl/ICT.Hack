@@ -1,25 +1,38 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import { Footer } from "../components/Footer/Footer"
-import { Navbar } from "../components/Navbar/Navbar"
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom"
 import { AppBody } from "./AppBody"
-import { CreateProject } from "./CreateProject/CreateProject"
 import { Home } from "./Home/Home"
-import { Profile } from "./Profile/Profile"
 import { Project } from "./Project/Project"
-import { UpdateProfile } from "./UpdateProfile/UpdateProfile"
-import Cookies from "js-cookie"
+import { useToken } from "../hooks/useToken"
+import { Suspense, lazy } from "react"
+
+const Profile = lazy(() => import("./Profile/Profile"))
+const UpdateProfile = lazy(() => import("./UpdateProfile/UpdateProfile"))
+const CreateProject = lazy(() => import("./CreateProject/CreateProject"))
 
 function App() {
+  const { token, setToken } = useToken()
+
   return (
     <Router>
-      <AppBody>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile-update' element={<UpdateProfile />} />
-          <Route path='/project/:id' element={<Project />} />
-          <Route path='/create-project' element={<CreateProject />} />
-        </Routes>
+      <AppBody token={token} setToken={setToken}>
+        <Suspense fallback={<h1>loading...</h1>}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/project/:id' element={<Project />} />
+            {token && (
+              <>
+                <Route path='/profile' element={<Profile />} />
+                <Route path='/profile-update' element={<UpdateProfile />} />
+                <Route path='/create-project' element={<CreateProject />} />
+              </>
+            )}
+          </Routes>
+        </Suspense>
       </AppBody>
     </Router>
   )

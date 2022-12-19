@@ -1,10 +1,10 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Link } from "react-router-dom"
 import { useQuery } from "wagmi"
 import { Wrapper } from "../../components/Forms/Wrapper"
 import { UserService } from "../../services/user"
 
-export const Profile = () => {
+const Profile = () => {
   const { data, isError, isLoading } = useQuery(
     ["user"],
     () => UserService.getMe(),
@@ -38,18 +38,18 @@ export const Profile = () => {
             {data?.firstName} {data?.secondName}
           </span>
           <span className='text-2xl font-normal '>
-            {data?.location.country.name}
+            {data?.location?.country.name}
           </span>
         </div>
 
         <div className='flex items-center gap-x-5 socials text-2xl font-normal text-darkGreen'>
-          <a target={"_blank"} href={data?.socials.twitter}>
+          <a target={"_blank"} href={data?.socials?.twitter}>
             Twitter
           </a>
-          <a target={"_blank"} href={data?.socials.telegram}>
+          <a target={"_blank"} href={data?.socials?.telegram}>
             Telegram
           </a>
-          <a target={"_blank"} href={data?.socials.github}>
+          <a target={"_blank"} href={data?.socials?.github}>
             GitHub
           </a>
         </div>
@@ -85,3 +85,5 @@ export const Profile = () => {
     </Wrapper>
   )
 }
+
+export default Profile
