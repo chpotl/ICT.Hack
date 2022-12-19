@@ -89,6 +89,7 @@ export interface IDropdown<T> {
   onChange: React.Dispatch<React.SetStateAction<string>>
   selection?: string
   optionSelection?: string
+  border?: boolean
 }
 
 export interface ITextInput {

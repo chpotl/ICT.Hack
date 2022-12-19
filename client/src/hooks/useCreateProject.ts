@@ -11,7 +11,7 @@ export const useCreateProject = () => {
 
   const initialValues: InitialValues = {
     name: "",
-    category: [],
+    category: "",
     tags: [],
     shortDescription: "",
     longDescription: "",

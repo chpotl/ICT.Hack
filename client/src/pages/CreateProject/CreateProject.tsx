@@ -14,7 +14,6 @@ import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
 
 const CreateProject = () => {
-  const [tags, setTags] = useState<string[]>([])
   const [team, setTeam] = useState<string[]>([])
 
   const {
@@ -44,6 +43,8 @@ const CreateProject = () => {
 
         <Label label={"Категория"} required>
           <Dropdown
+            activeOption={values.category}
+            border
             placeholder='Категория'
             options={categories}
             onChange={(value) => setFieldValue("category", value)}
@@ -53,8 +54,8 @@ const CreateProject = () => {
         <Label label={"Теги"} required>
           <EnterInput
             enterTitle='нажмите Enter после ввода тега'
-            selectors={tags}
-            setSelectors={setTags}
+            selectors={values.tags}
+            setSelectors={(tags: any) => setFieldValue("tags", tags)}
             placeholder={"теги проекта"}
           />
         </Label>
