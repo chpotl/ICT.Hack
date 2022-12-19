@@ -1,3 +1,5 @@
+import { HTMLInputTypeAttribute } from "react"
+
 export interface ICategory {
   _id: string
   name: string
@@ -86,4 +88,13 @@ export interface IDropdown<T> {
   selectOption: string
   select: string
   onSelect: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface ITextInput {
+  value: string
+  setValue: () => void
+  placeholder: string
+  type: HTMLInputTypeAttribute | undefined
+  name?: string
+  error?: any
 }

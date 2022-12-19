@@ -1,16 +1,15 @@
 import React, { FC, useState } from "react"
-import { SkillButton } from "../Buttons/SkillButton"
-import { Label } from "../Forms/Label"
-import { LabelInput } from "./LabelInput"
 import { ILabelInput } from "./LabelInput"
+import { SelectButton } from "../Buttons/SelectButton"
 
 type TEnterInput = Omit<ILabelInput, "setValue">
 
-interface Props {}
+interface Props extends TEnterInput {
+  enterTitle: string
+}
 
-export const EnterInput: FC<TEnterInput> = ({
-  label,
-  required,
+export const EnterInput: FC<Props> = ({
+  enterTitle,
   type,
   name,
   placeholder,
@@ -23,30 +22,35 @@ export const EnterInput: FC<TEnterInput> = ({
     if (e.key === "Enter") {
       setSelectors([...selectors, e.target.value])
       e.preventDefault()
+      setTextInput("")
     }
+  }
+
+  const handleRemoveSelector = (title: string) => {
+    setSelectors(selectors.filter((select: string) => select !== title))
   }
 
   return (
     <>
-      <div>
-        <Label label={label} required={required}>
-          <input
-            onKeyDown={(e) => handleSetSelectors(e)}
-            onChange={(e) => setTextInput(e.target.value)}
-            name={name}
-            type={type}
-            className='text-xl placeholder:text-lightGray text-white border border-lightGray bg-lightBlack px-[20px] py-[13px] w-full rounded-[20px] outline-none font-normal'
-            value={textInput}
-            placeholder={placeholder}
-          />
-        </Label>
+      <input
+        onKeyDown={(e) => handleSetSelectors(e)}
+        onChange={(e) => setTextInput(e.target.value)}
+        name={name}
+        type={type}
+        className='text-xl placeholder:text-lightGray text-white border border-lightGray bg-lightBlack px-[20px] py-[13px] w-full rounded-[20px] outline-none font-normal'
+        value={textInput}
+        placeholder={placeholder}
+      />
 
-        <span className='text-gray'>нажмите Enter после ввода навыка</span>
-      </div>
+      <span className='text-gray'>{enterTitle}</span>
 
       <div className='flex flex-wrap gap-2 w-full'>
         {selectors.map((select, i) => (
-          <SkillButton title={select} key={i} />
+          <SelectButton
+            handleRemoveSelector={handleRemoveSelector}
+            title={select}
+            key={i}
+          />
         ))}
       </div>
     </>

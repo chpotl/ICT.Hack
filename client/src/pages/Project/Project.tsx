@@ -53,8 +53,6 @@ export const Project = () => {
     sendTransaction,
   } = useSendTransaction(config)
 
-  console.log(txData)
-
   const handleSetAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value)
   }
@@ -80,7 +78,7 @@ export const Project = () => {
 
             <a target={"_blank"} href={data?.demoUrl}>
               <div
-                className={`p-[20px] py-[10px] font-bold text-2xl border rounded-[10px] border-lightGray bg-white`}
+                className={`p-[20px] py-[10px] font-bold text-2xl rounded-[10px] bg-white`}
               >
                 <span className='text-black'>Demo</span>
               </div>

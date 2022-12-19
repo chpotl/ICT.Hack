@@ -20,8 +20,18 @@ interface Props {
 export const SignUpLogin: FC<Props> = ({ setUser, setToken, close }) => {
   const [loginOrSign, setLoginOrSign] = useState<"login" | "signup">("signup")
 
-  const authUser = useMutation((user) =>
-    UserService.authUser(user, loginOrSign)
+  const { mutate, isLoading } = useMutation(
+    (user) => UserService.authUser(user, loginOrSign),
+    {
+      onSuccess: ({ data }) => {
+        setUser(data.data.user)
+        setToken(data.token)
+        close()
+      },
+      onError: (error) => {
+        console.log(error)
+      },
+    }
   )
 
   const initialValues: ISignUpLogin = {
@@ -39,17 +49,10 @@ export const SignUpLogin: FC<Props> = ({ setUser, setToken, close }) => {
     onSubmit: (values) => {
       console.log("form submitted")
 
-      authUser
-        .mutateAsync({
-          email: formik.values.email,
-          password: formik.values.password,
-        })
-        .then(({ data }) => {
-          console.log("data", data)
-          setToken(data.token)
-          setUser(data.data.user)
-          close()
-        })
+      mutate({
+        email: formik.values.email,
+        password: formik.values.password,
+      })
     },
   })
 

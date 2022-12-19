@@ -1,14 +1,10 @@
-import React, { useState } from "react"
-import { useMutation } from "react-query"
-import { UserService } from "../services/user"
+import { useState } from "react"
 import Cookies from "js-cookie"
 
 export const useToken = () => {
-  let jwt = Cookies.get("jwt")
+  const [token, setToken] = useState(Cookies.get("jwt") || "")
 
-  const [token, setToken] = useState(jwt || "")
-
-  console.log(jwt)
+  console.log(token)
 
   return {
     token,

@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import { BackgroundImage } from "../../components/Profile/BackgroundImage"
-import { Form } from "react-router-dom"
+import { Form } from "../../components/Forms/Form"
 import { Button } from "../../components/Buttons/Button"
 import { Dropdown } from "../../components/Dropdowns/Dropdown"
-import { Label } from "../../components/Forms/Label"
+import { Label } from "../../components/Inputs/Label"
 import { EnterInput } from "../../components/Inputs/EnterInput"
-import { LabelInput } from "../../components/Inputs/LabelInput"
 import { TextArea } from "../../components/Inputs/TextArea"
-import { WrapperTitle } from "../../components/Profile/WrapperTitle"
+import { Title } from "../../components/Forms/Title"
 import { SearchInput } from "../../components/Search/SearchInput"
+import { Wrapper } from "../../components/Forms/Wrapper"
+import { TextInput } from "../../components/Inputs/TextInput"
 
 const UpdateProfile = () => {
   const [skills, setSkills] = useState<string[]>([])
@@ -20,38 +21,39 @@ const UpdateProfile = () => {
     <Form title='Редактирование профиля' onSubmit={onSubmit}>
       <BackgroundImage />
 
-      <WrapperTitle title='Мои данные'>
-        <LabelInput
-          required={true}
-          value={""}
-          setValue={() => {}}
-          placeholder={"имя пользователя"}
-          type={"text"}
-          label='Ник'
-        />
+      <Title title='Мои данные' />
+      <Wrapper>
+        <Label label='Ник' required>
+          <TextInput
+            value={""}
+            setValue={() => {}}
+            placeholder={"имя пользователя"}
+            type={"text"}
+          />
+        </Label>
 
         <div className='flex justify-between items-center w-full gap-x-5'>
-          <LabelInput
-            required={true}
-            value={""}
-            setValue={() => {}}
-            placeholder={"ваше имя"}
-            type={"text"}
-            label='Имя'
-          />
+          <Label label='Имя' required>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"ваше имя"}
+              type={"text"}
+            />
+          </Label>
 
-          <LabelInput
-            required={true}
-            value={""}
-            setValue={() => {}}
-            placeholder={"ваша фамилия"}
-            type={"text"}
-            label='Фамилия'
-          />
+          <Label label='Фамилия' required>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"ваша фамилия"}
+              type={"text"}
+            />
+          </Label>
         </div>
 
         <div className='grid grid-cols-[0.5fr__1fr] gap-x-5 w-full'>
-          <Label required={true} label='Страна'>
+          <Label label='Страна' required>
             <Dropdown
               title={"страна"}
               data={["1", "2", "3"]}
@@ -60,20 +62,22 @@ const UpdateProfile = () => {
               onSelect={() => {}}
             />
           </Label>
-          <Label required={true} label='Город'>
+          <Label label='Город' required>
             <SearchInput placeholder={"город"} />
           </Label>
         </div>
-      </WrapperTitle>
+      </Wrapper>
 
-      <WrapperTitle title='Обо мне'>
-        <TextArea
-          maxLength={140}
-          label={"Описание"}
-          value={""}
-          setValue={() => {}}
-          placeholder={"коротко обо мне"}
-        />
+      <Title title='Обо мне' />
+      <Wrapper>
+        <Label label='Обо мне'>
+          <TextArea
+            maxLength={140}
+            value={""}
+            setValue={() => {}}
+            placeholder={"коротко обо мне"}
+          />
+        </Label>
 
         {/* <span className='font-bold text-xl'>Роли</span>
 
@@ -82,52 +86,62 @@ const UpdateProfile = () => {
             <SelectButton title={role} key={i} />
           ))}
         </div> */}
-        <EnterInput
-          selectors={roles}
-          setSelectors={setRoles}
-          label={"Роли"}
-          placeholder={"мои роли"}
-        />
-        <EnterInput
-          selectors={skills}
-          setSelectors={setSkills}
-          label={"Навыки"}
-          placeholder={"мои навыки"}
-        />
-      </WrapperTitle>
+        <Label label='Роли'>
+          <EnterInput
+            enterTitle='нажмите Enter после ввода роли'
+            selectors={roles}
+            setSelectors={setRoles}
+            placeholder={"мои роли"}
+          />
+        </Label>
 
-      <WrapperTitle title='Контакты'>
+        <Label label='Навыки' required>
+          <EnterInput
+            enterTitle='нажмите Enter после ввода навыка'
+            selectors={skills}
+            setSelectors={setSkills}
+            placeholder={"мои навыки"}
+          />
+        </Label>
+      </Wrapper>
+
+      <Title title='Контакты' />
+      <Wrapper>
         <div className='flex justify-between items-center gap-x-5'>
-          <LabelInput
-            value={""}
-            setValue={() => {}}
-            placeholder={"@"}
-            type={"text"}
-            label='Twitter'
-          />
-          <LabelInput
-            value={""}
-            setValue={() => {}}
-            placeholder={"@"}
-            type={"text"}
-            label='Telegram'
-          />
-          <LabelInput
-            value={""}
-            setValue={() => {}}
-            placeholder={"@"}
-            type={"text"}
-            label='GitHub'
-          />
-          <LabelInput
-            value={""}
-            setValue={() => {}}
-            placeholder={"@"}
-            type={"text"}
-            label='LinkedIn'
-          />
+          <Label label={"Twitter"}>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"@"}
+              type={"text"}
+            />
+          </Label>
+          <Label label={"Telegram"}>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"@"}
+              type={"text"}
+            />
+          </Label>
+          <Label label='Github'>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"@"}
+              type={"text"}
+            />
+          </Label>
+          <Label label='Linkedin'>
+            <TextInput
+              value={""}
+              setValue={() => {}}
+              placeholder={"@"}
+              type={"text"}
+            />
+          </Label>
         </div>
-      </WrapperTitle>
+      </Wrapper>
 
       <div className='flex justify-between'>
         <Button
