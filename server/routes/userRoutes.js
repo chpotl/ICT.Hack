@@ -9,6 +9,7 @@ router.post('/login', authController.login);
 router.get('/username/:username', userController.getUser);
 
 router.use(authController.protect);
+router.get('/logout', authController.logout);
 router.get('/me', userController.getMe);
 router.patch('/updateMe', userController.updateMe);
 router.post('/addFav', userController.addFavorite);

@@ -94,6 +94,15 @@ const projectSchema = new mongoose.Schema({
     required: true,
     default: 30,
   },
+  freeCashFlow: {
+    type: Number,
+    required: true,
+    default: 100000000,
+  },
+  realisation: {
+    type: String,
+    required: true,
+  },
 });
 
 projectSchema.pre('save', async function (next) {

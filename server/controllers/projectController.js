@@ -75,6 +75,8 @@ exports.create = catchAsync(async (req, res, next) => {
     region: req.body.region,
     investments: req.body.investments,
     walletAddress: req.body.walletAddress,
+    freeCashFlow: req.body.freeCashFlow,
+    realisation: req.body.realisation,
   });
   if (req.body.tags) {
     const tags = req.body.tags;
