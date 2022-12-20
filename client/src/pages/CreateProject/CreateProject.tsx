@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import { Form } from "../../components/Forms/Form"
 import { EnterInput } from "../../components/Inputs/EnterInput"
 import { Label } from "../../components/Inputs/Label"
@@ -14,14 +13,12 @@ import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
 
 const CreateProject = () => {
-  const [team, setTeam] = useState<string[]>([])
-
   const {
     data: categories,
     isError,
     isLoading,
   } = useQuery(["categories"], () => ProjectService.getCategories(), {
-    select: (data) => data.category.map((category) => category.name),
+    select: (data) => data.category,
   })
 
   const { values, handleChange, handleSubmit, resetForm, setFieldValue } =
@@ -46,6 +43,8 @@ const CreateProject = () => {
             activeOption={values.category}
             border
             placeholder='Категория'
+            selection={"_id"}
+            optionSelection={"name"}
             options={categories}
             onChange={(value) => setFieldValue("category", value)}
           />
@@ -67,6 +66,26 @@ const CreateProject = () => {
             setValue={handleChange}
             placeholder={"сколько собрано инвестиций"}
             type={"number"}
+          />
+        </Label>
+
+        <Label label='freeCashFlow'>
+          <TextInput
+            name={"freeCashFlow"}
+            value={values.freeCashFlow?.toString()}
+            setValue={handleChange}
+            placeholder={"freeCashFlow"}
+            type={"number"}
+          />
+        </Label>
+
+        <Label label='Сроки реализации'>
+          <TextInput
+            name={"realisation"}
+            value={values.realisation}
+            setValue={handleChange}
+            placeholder={"когда проект будет реализован"}
+            type={"string"}
           />
         </Label>
       </Wrapper>
@@ -129,11 +148,14 @@ const CreateProject = () => {
       <Title title='Презентация' />
       <Wrapper>
         <div className='grid grid-cols-2 grid-rows-1 gap-x-2'>
-          <Label label='Логотип'>
-            <UploadInput />
+          <Label label='Обложка'>
+            <UploadInput
+              file={values.coverUrl}
+              setFile={(file: File) => setFieldValue("coverUrl", file)}
+            />
           </Label>
 
-          <Label label='Обложка'>
+          {/* <Label label='Обложка'>
             <UploadInput />
           </Label>
         </div>
@@ -150,22 +172,9 @@ const CreateProject = () => {
             <UploadInput />
             <UploadInput />
             <UploadInput />
-          </div>
-        </Label>
-
-        {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5'>
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput /> 
-         </div>  */}
+          </div> */}
+          {/* </Label> */}
+        </div>
       </Wrapper>
 
       <div className='flex justify-between'>

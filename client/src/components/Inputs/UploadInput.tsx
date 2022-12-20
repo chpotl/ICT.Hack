@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 import { Button } from "../Buttons/Button"
 import { CloseButton } from "../Buttons/CloseButton"
 import { Upload } from "../Icons/Upload"
 
-export const UploadInput = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+interface Props {
+  file: any
+  setFile: any
+}
 
-  const [file, setFile] = useState<FileList | null>(null)
+export const UploadInput: FC<Props> = ({ file, setFile }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null)
 

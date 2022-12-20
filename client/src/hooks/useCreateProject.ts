@@ -31,6 +31,8 @@ export const useCreateProject = () => {
     demoUrl: "",
     walletAddress: "",
     region: "",
+    freeCashFlow: 0,
+    realisation: "",
   }
 
   const {
@@ -59,11 +61,13 @@ export const useCreateProject = () => {
       demoUrl: Yup.string(),
       walletAddress: Yup.string(),
       region: Yup.string(),
+      freeCashFlow: Yup.number(),
+      realisation: Yup.string(),
     }),
     onSubmit: () => {
       console.log("values", values)
       console.log("errors", errors)
-      //mutate(values)
+      mutate(values)
     },
   })
 

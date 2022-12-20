@@ -20,9 +20,9 @@ export const Upload: FC<Props> = ({ color }) => {
       <path
         d='M1 19V31H28V19'
         stroke='#FEFEF9'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

@@ -35,6 +35,8 @@ export interface IProject {
   region: string
   walletAddress: string
   trendIndex: number
+  freeCashFlow: number
+  realisation: string
 }
 
 export interface ISignUpLogin {

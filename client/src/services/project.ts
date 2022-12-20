@@ -50,6 +50,8 @@ export const ProjectService = {
     return data
   },
   async createNew(project: IProject): Promise<IProject> {
-    return api.post("/api/project", project)
+    return api.post("/api/project", project, {
+      withCredentials: true,
+    })
   },
 }
