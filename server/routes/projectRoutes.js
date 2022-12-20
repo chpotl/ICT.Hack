@@ -11,13 +11,8 @@ router.use(authController.protect)
 router.post(
   "/",
   upload.fields([
-<<<<<<< HEAD
     { name: "coverUrl", maxCount: 1 },
-    // { name: 'screenShotsUrl', maxCount: 6 },
-=======
-    { name: 'coverUrl', maxCount: 1 },
-    { name: 'screenShotsUrl', maxCount: 6 },
->>>>>>> bf537738fe2ba7d3e442e82cc3c13eb81a378312
+    { name: "screenShotsUrl", maxCount: 6 },
   ]),
   projectController.create
 )

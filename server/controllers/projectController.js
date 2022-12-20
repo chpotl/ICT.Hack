@@ -58,46 +58,10 @@ exports.getById = catchAsync(async (req, res, next) => {
 })
 
 exports.create = catchAsync(async (req, res, next) => {
-<<<<<<< HEAD
   console.log(req.files)
-  console.log(req.body)
-  // const screenShotsUrls = req.files.screenShotsUrl.map((el) => {
-  //   return el.path
-  // })
-  // const newProject = await Project.create({
-  //   name: req.body.name,
-  //   category: req.body.category,
-  //   tags: req.body.tags,
-  //   shortDescription: req.body.shortDescription,
-  //   longDescription: req.body.longDescription,
-  //   webSite: req.body.webSite,
-  //   logoUrl: req.files.logoUrl[0].path,
-  //   coverUrl: req.files.coverUrl[0].path,
-  //   presentationUrl: req.body.presentationUrl,
-  //   screenShotsUrl: screenShotsUrls,
-  //   teamMembers: req.body.teamMembers,
-  //   demoUrl: req.body.demoUrl,
-  //   creator: req.user._id,
-  //   region: req.body.region,
-  //   investments: req.body.investments,
-  //   walletAddress: req.body.walletAddress,
-  //   freeCashFlow: req.body.freeCashFlow,
-  //   realisation: req.body.realisation,
-  // })
-  // if (req.body.tags) {
-  //   const tags = req.body.tags
-  //   tags.forEach(async (tag) => {
-  //     return await Tag.findOneAndUpdate(
-  //       { name: tag },
-  //       { name: tag },
-  //       { upsert: true }
-  //     )
-  //   })
-  // }
-=======
   const screenShotsUrls = req.files.screenShotsUrl.map((el) => {
-    return el.path;
-  });
+    return el.path
+  })
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
@@ -115,20 +79,19 @@ exports.create = catchAsync(async (req, res, next) => {
     walletAddress: req.body.walletAddress,
     freeCashFlow: req.body.freeCashFlow,
     realisation: req.body.realisation,
-  });
+  })
   if (req.body.tags) {
-    const tags = req.body.tags;
+    const tags = req.body.tags
     tags.forEach(async (tag) => {
       return await Tag.findOneAndUpdate(
         { name: tag },
         { name: tag },
         { upsert: true }
-      );
-    });
+      )
+    })
   }
->>>>>>> bf537738fe2ba7d3e442e82cc3c13eb81a378312
   res.status(200).json({
     message: "success",
-    //newProject,
+    newProject,
   })
 })
