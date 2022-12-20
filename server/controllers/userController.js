@@ -16,9 +16,11 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       skills: req.body.skills,
       socials: req.body.socials,
       cvUrl: req.body.cvUrl,
-      favorite: req.body.favorite,
+      avatarUrl: req.files.avatar[0].path,
+      coverUrl: req.files.cover[0].path,
     }
   );
+  console.log(req.files);
   res.status(200).json({
     message: 'success',
   });

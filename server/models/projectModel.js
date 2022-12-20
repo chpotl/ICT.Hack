@@ -61,8 +61,7 @@ const projectSchema = new mongoose.Schema({
   ],
   teamMembers: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
+      type: String,
     },
   ],
   moderated: {
