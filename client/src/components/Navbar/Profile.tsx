@@ -13,15 +13,13 @@ export const Profile: FC<Props> = ({ isMenuOpen, setMenuOpened, user }) => {
     isMenuOpen && "rotate-180"
   }`
 
-  console.log("user", user)
-
   return (
     <div className='flex items-center space-x-2'>
       <button
         onClick={() => setMenuOpened(!isMenuOpen)}
         className={`rounded-full bg-lightGray flex justify-center items-center w-[70px] h-[70px] group hover:bg-black  transition-colors duration-500 ease`}
       >
-        <span className='font-bold text-xl text-white group-hover:text-mainGreen'>
+        <span className='font-bold text-xl text-white group-hover:text-mainGreen overflow-hidden'>
           {user?.username}
         </span>
       </button>

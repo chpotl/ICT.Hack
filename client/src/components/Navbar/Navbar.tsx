@@ -19,11 +19,7 @@ interface Props {
 export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
   const [isMenuOpen, setMenuOpened] = useState(false)
 
-  // console.log("token", token)
-
   const isLogged = token ? true : false
-
-  console.log("isLogged", isLogged)
 
   return (
     <>
@@ -32,7 +28,9 @@ export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
         <SearchInput placeholder='Искать грант' />
 
         <div className='flex items-center space-x-10'>
-          <Links />
+          <div className='hidden sm:block'>
+            <Links />
+          </div>
 
           {isLogged ? (
             <div className='relative'>

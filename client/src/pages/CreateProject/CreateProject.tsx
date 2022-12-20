@@ -5,7 +5,7 @@ import { Label } from "../../components/Inputs/Label"
 import { Title } from "../../components/Forms/Title"
 import { TextArea } from "../../components/Inputs/TextArea"
 import { Dropdown } from "../../components/Dropdowns/Dropdown"
-import { DownloadInput } from "../../components/Inputs/DownloadInput"
+import { UploadInput } from "../../components/Inputs/UploadInput"
 import { Button } from "../../components/Buttons/Button"
 import { TextInput } from "../../components/Inputs/TextInput"
 import { Wrapper } from "../../components/Forms/Wrapper"
@@ -55,7 +55,7 @@ const CreateProject = () => {
           <EnterInput
             enterTitle='нажмите Enter после ввода тега'
             selectors={values.tags}
-            setSelectors={(tags: any) => setFieldValue("tags", tags)}
+            setSelectors={(tags: string) => setFieldValue("tags", tags)}
             placeholder={"теги проекта"}
           />
         </Label>
@@ -104,11 +104,23 @@ const CreateProject = () => {
           />
         </Label>
 
+        <Label label={"Адрес крипто кошелька"}>
+          <TextInput
+            name={"walletAddress"}
+            value={values.walletAddress}
+            setValue={handleChange}
+            placeholder={"0x3c21AdC545aF820f9734eb67e504a845b897c4FF"}
+            type={"text"}
+          />
+        </Label>
+
         <Label label='Команда'>
           <EnterInput
             enterTitle='нажмите Enter после ввода имени пользователя'
-            selectors={team}
-            setSelectors={setTeam}
+            selectors={values.teamMembers}
+            setSelectors={(teamMembers: string) =>
+              setFieldValue("teamMembers", teamMembers)
+            }
             placeholder={"имя пользователя"}
           />
         </Label>
@@ -116,13 +128,32 @@ const CreateProject = () => {
 
       <Title title='Презентация' />
       <Wrapper>
-        <div className='flex space-x-2'>
-          <DownloadInput />
-          <DownloadInput />
+        <div className='grid grid-cols-2 grid-rows-1 gap-x-2'>
+          <Label label='Логотип'>
+            <UploadInput />
+          </Label>
+
+          <Label label='Обложка'>
+            <UploadInput />
+          </Label>
         </div>
-        <DownloadInput />
 
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5'>
+        <Label label='Презентация'>
+          <UploadInput />
+        </Label>
+
+        <Label label='Скриншоты'>
+          <div className='grid grid-cols-6 gap-5'>
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+          </div>
+        </Label>
+
+        {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5'>
           <DownloadInput />
 
           <DownloadInput />
@@ -133,8 +164,8 @@ const CreateProject = () => {
 
           <DownloadInput />
 
-          <DownloadInput />
-        </div>
+          <DownloadInput /> 
+         </div>  */}
       </Wrapper>
 
       <div className='flex justify-between'>

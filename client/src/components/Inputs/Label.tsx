@@ -6,9 +6,9 @@ interface Props {
   children: React.ReactNode
 }
 
-export const Label: FC<Props> = ({ label, children, required = false }) => {
+export const Label: FC<Props> = ({ label, children, required }) => {
   return (
-    <label className='w-full'>
+    <label className='w-full h-full'>
       <span className='font-bold text-xl'>
         {label} {required && <span className='text-darkGreen'>*</span>}
       </span>
