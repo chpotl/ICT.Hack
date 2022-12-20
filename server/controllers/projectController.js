@@ -61,15 +61,12 @@ exports.create = catchAsync(async (req, res, next) => {
   const screenShotsUrls = req.files.screenShotsUrl.map((el) => {
     return el.path;
   });
-  console.log(screenShotsUrls);
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
     tags: req.body.tags,
     shortDescription: req.body.shortDescription,
     longDescription: req.body.longDescription,
-    webSite: req.body.webSite,
-    logoUrl: req.files.logoUrl[0].path,
     coverUrl: req.files.coverUrl[0].path,
     presentationUrl: req.body.presentationUrl,
     screenShotsUrl: screenShotsUrls,

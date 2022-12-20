@@ -37,14 +37,6 @@ const projectSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  webSite: {
-    type: String,
-    required: true,
-  },
-  logoUrl: {
-    type: String,
-    required: true,
-  },
   coverUrl: {
     type: String,
     required: true,
@@ -64,22 +56,12 @@ const projectSchema = new mongoose.Schema({
       type: String,
     },
   ],
-  moderated: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
   creator: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
   demoUrl: {
     type: String,
-    required: true,
-  },
-  region: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Country',
     required: true,
   },
   walletAddress: {

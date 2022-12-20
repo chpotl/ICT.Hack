@@ -11,7 +11,6 @@ router.use(authController.protect);
 router.post(
   '/',
   upload.fields([
-    { name: 'logoUrl', maxCount: 1 },
     { name: 'coverUrl', maxCount: 1 },
     { name: 'screenShotsUrl', maxCount: 6 },
   ]),
