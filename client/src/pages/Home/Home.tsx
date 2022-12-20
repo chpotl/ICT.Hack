@@ -17,7 +17,7 @@ export const Home = () => {
   }
 
   return (
-    <div className='flex justify-between gap-5'>
+    <div className='grid grid-cols-[0.2fr__1fr] gap-x-5'>
       <Filters
         tag={tag}
         category={category}

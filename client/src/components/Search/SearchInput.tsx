@@ -8,17 +8,15 @@ interface Props {
 
 export const SearchInput: FC<Props> = ({ placeholder }) => {
   return (
-    <label>
-      <div className='flex items-center bg-lightBlack p-2 rounded-[20px] space-x-2 px-5'>
-        <div>
-          <Search />
-        </div>
-        <input
-          placeholder={placeholder}
-          className='bg-lightBlack border-none outline-none w-full text-2xl text-white placeholder:text-white'
-        />
-        <SlashShortCut />
-      </div>
-    </label>
+    <div className='flex h-full items-center bg-lightBlack p-2 rounded-[20px] space-x-2 px-5 w-full'>
+      <span>
+        <Search />
+      </span>
+      <input
+        placeholder={placeholder}
+        className='bg-lightBlack border-none outline-none w-full text-2xl text-white placeholder:text-white'
+      />
+      <SlashShortCut />
+    </div>
   )
 }
