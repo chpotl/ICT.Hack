@@ -16,7 +16,6 @@ export const AppBody = ({ children, token, setToken }: Props) => {
   const { isOpen, toggle, close } = useModal()
 
   const [user, setUser] = useState<IUser | {}>({})
-  console.log("user", user)
 
   const clearUser = () => {
     setToken("")

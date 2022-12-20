@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import { CloseButton } from "../Buttons/CloseButton"
 
 export interface IDropdownItem {
   option: any
@@ -23,17 +24,28 @@ export const DropdownItem: FC<IDropdownItem> = ({
     }
   }
 
+  const handleRemoveDropdwonItem = () => {
+    onClick("")
+  }
+
+  const isActive = activeOption === option[selection] || activeOption === option
+
   return (
-    <button
-      onClick={handleChange}
-      className={`${
-        activeOption === option[selection] || activeOption === option
-          ? "bg-lightGreen text-black"
-          : "hover:bg-hovLightBlack"
-      } p-2 rounded-[10px] font-normal text-start
-        `}
+    <div
+      className={`flex items-center ${
+        isActive ? "bg-lightGreen text-black" : "hover:bg-hovLightBlack"
+      } rounded-[10px]`}
     >
-      {optionSelection ? option[optionSelection] : option}
-    </button>
+      <button
+        onClick={handleChange}
+        className={`font-normal p-2 text-start w-full
+        `}
+      >
+        {optionSelection ? option[optionSelection] : option}
+      </button>
+      {isActive ? (
+        <CloseButton color='black' close={handleRemoveDropdwonItem} />
+      ) : null}
+    </div>
   )
 }

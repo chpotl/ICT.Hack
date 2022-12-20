@@ -49,4 +49,9 @@ export const ProjectService = {
     const { data } = await api.get("/api/project")
     return data
   },
+  async createNew(project: IProject): Promise<IProject> {
+    return api.post("/api/project", project, {
+      withCredentials: true,
+    })
+  },
 }

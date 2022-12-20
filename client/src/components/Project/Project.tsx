@@ -21,7 +21,7 @@ export const Project: FC<Props> = ({ project }) => {
 
   return (
     <Link to={`project/${project._id}`}>
-      <div className='border border-lightGray rounded-[20px] overflow-hidden hover:scale-[103%] transition-transform duration-500'>
+      <div className='border border-lightGray rounded-[20px] overflow-hidden'>
         {/* hover:scale-105 transition-transform duration-500 easy-in-out */}
         <img src={project.logoUrl} className='h-60 w-full object-cover' />
 

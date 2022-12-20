@@ -9,7 +9,7 @@ interface Props {
 export const Slider: FC<Props> = ({ images }) => {
   return (
     <>
-      <div className='flex gap-x-5 overflow-y-auto'>
+      <div className='h-96 flex gap-x-5 overflow-x-auto'>
         {images?.map((image) => (
           <Image url={image} />
         ))}

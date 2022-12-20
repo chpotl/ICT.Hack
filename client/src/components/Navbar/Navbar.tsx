@@ -19,39 +19,38 @@ interface Props {
 export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
   const [isMenuOpen, setMenuOpened] = useState(false)
 
-  // console.log("token", token)
-
   const isLogged = token ? true : false
 
-  console.log("isLogged", isLogged)
-
   return (
-    <>
-      <nav className='flex justify-between items-center p-5 w-full'>
+    <nav className='flex h-28 justify-between p-5'>
+      <div className='h-full pr-5'>
         <Logo />
+      </div>
+
+      <div className='h-full flex items-center'>
         <SearchInput placeholder='Искать грант' />
+      </div>
 
-        <div className='flex items-center space-x-10'>
-          <Links />
+      <div className='h-full flex items-center'>
+        <Links />
+      </div>
 
-          {isLogged ? (
-            <div className='relative'>
-              <Profile
-                user={user}
-                setMenuOpened={setMenuOpened}
-                isMenuOpen={isMenuOpen}
-              />
-              {isMenuOpen && <Menu clearUser={clearUser} />}
-            </div>
-          ) : (
-            <Button
-              onClick={toggle}
-              title='Войти'
-              className='bg-darkGreen px-5 py-[15px] rounded-[20px]'
-            />
-          )}
+      {isLogged ? (
+        <div className='relative'>
+          <Profile
+            user={user}
+            setMenuOpened={setMenuOpened}
+            isMenuOpen={isMenuOpen}
+          />
+          {isMenuOpen && <Menu clearUser={clearUser} />}
         </div>
-      </nav>
-    </>
+      ) : (
+        <Button
+          onClick={toggle}
+          title='Войти'
+          className='bg-darkGreen px-5 rounded-[20px]'
+        />
+      )}
+    </nav>
   )
 }

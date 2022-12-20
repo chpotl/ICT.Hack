@@ -1,11 +1,10 @@
-import React, { useState } from "react"
 import { Form } from "../../components/Forms/Form"
 import { EnterInput } from "../../components/Inputs/EnterInput"
 import { Label } from "../../components/Inputs/Label"
 import { Title } from "../../components/Forms/Title"
 import { TextArea } from "../../components/Inputs/TextArea"
 import { Dropdown } from "../../components/Dropdowns/Dropdown"
-import { DownloadInput } from "../../components/Inputs/DownloadInput"
+import { UploadInput } from "../../components/Inputs/UploadInput"
 import { Button } from "../../components/Buttons/Button"
 import { TextInput } from "../../components/Inputs/TextInput"
 import { Wrapper } from "../../components/Forms/Wrapper"
@@ -14,14 +13,12 @@ import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
 
 const CreateProject = () => {
-  const [team, setTeam] = useState<string[]>([])
-
   const {
     data: categories,
     isError,
     isLoading,
   } = useQuery(["categories"], () => ProjectService.getCategories(), {
-    select: (data) => data.category.map((category) => category.name),
+    select: (data) => data.category,
   })
 
   const { values, handleChange, handleSubmit, resetForm, setFieldValue } =
@@ -46,6 +43,8 @@ const CreateProject = () => {
             activeOption={values.category}
             border
             placeholder='Категория'
+            selection={"_id"}
+            optionSelection={"name"}
             options={categories}
             onChange={(value) => setFieldValue("category", value)}
           />
@@ -55,7 +54,7 @@ const CreateProject = () => {
           <EnterInput
             enterTitle='нажмите Enter после ввода тега'
             selectors={values.tags}
-            setSelectors={(tags: any) => setFieldValue("tags", tags)}
+            setSelectors={(tags: string) => setFieldValue("tags", tags)}
             placeholder={"теги проекта"}
           />
         </Label>
@@ -67,6 +66,26 @@ const CreateProject = () => {
             setValue={handleChange}
             placeholder={"сколько собрано инвестиций"}
             type={"number"}
+          />
+        </Label>
+
+        <Label label='freeCashFlow'>
+          <TextInput
+            name={"freeCashFlow"}
+            value={values.freeCashFlow?.toString()}
+            setValue={handleChange}
+            placeholder={"freeCashFlow"}
+            type={"number"}
+          />
+        </Label>
+
+        <Label label='Сроки реализации'>
+          <TextInput
+            name={"realisation"}
+            value={values.realisation}
+            setValue={handleChange}
+            placeholder={"когда проект будет реализован"}
+            type={"string"}
           />
         </Label>
       </Wrapper>
@@ -104,11 +123,23 @@ const CreateProject = () => {
           />
         </Label>
 
+        <Label label={"Адрес крипто кошелька"}>
+          <TextInput
+            name={"walletAddress"}
+            value={values.walletAddress}
+            setValue={handleChange}
+            placeholder={"0x3c21AdC545aF820f9734eb67e504a845b897c4FF"}
+            type={"text"}
+          />
+        </Label>
+
         <Label label='Команда'>
           <EnterInput
             enterTitle='нажмите Enter после ввода имени пользователя'
-            selectors={team}
-            setSelectors={setTeam}
+            selectors={values.teamMembers}
+            setSelectors={(teamMembers: string) =>
+              setFieldValue("teamMembers", teamMembers)
+            }
             placeholder={"имя пользователя"}
           />
         </Label>
@@ -116,24 +147,33 @@ const CreateProject = () => {
 
       <Title title='Презентация' />
       <Wrapper>
-        <div className='flex space-x-2'>
-          <DownloadInput />
-          <DownloadInput />
+        <div className='grid grid-cols-2 grid-rows-1 gap-x-2'>
+          <Label label='Обложка'>
+            <UploadInput
+              file={values.coverUrl}
+              setFile={(file: File) => setFieldValue("coverUrl", file)}
+            />
+          </Label>
+
+          {/* <Label label='Обложка'>
+            <UploadInput />
+          </Label>
         </div>
-        <DownloadInput />
 
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5'>
-          <DownloadInput />
+        <Label label='Презентация'>
+          <UploadInput />
+        </Label>
 
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
-
-          <DownloadInput />
+        <Label label='Скриншоты'>
+          <div className='grid grid-cols-6 gap-5'>
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+            <UploadInput />
+          </div> */}
+          {/* </Label> */}
         </div>
       </Wrapper>
 
