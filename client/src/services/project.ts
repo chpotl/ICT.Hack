@@ -52,6 +52,17 @@ export const ProjectService = {
   async createNew(project: IProject): Promise<IProject> {
     return api.post("/api/project", project, {
       withCredentials: true,
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
+    })
+  },
+  async upload(photo: any) {
+    return api.post("/api/project", photo, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     })
   },
 }

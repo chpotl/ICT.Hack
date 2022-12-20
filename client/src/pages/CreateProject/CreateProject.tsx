@@ -11,6 +11,7 @@ import { Wrapper } from "../../components/Forms/Wrapper"
 import { useCreateProject } from "../../hooks/useCreateProject"
 import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
+import { useState } from "react"
 
 const CreateProject = () => {
   const {
@@ -69,7 +70,7 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label label='freeCashFlow'>
+        <Label label='Free Cash Flow'>
           <TextInput
             name={"freeCashFlow"}
             value={values.freeCashFlow?.toString()}
@@ -113,12 +114,22 @@ const CreateProject = () => {
             }
           />
         </Label>
-        <Label label='Сайт проекта'>
+        <Label label='Ссылка на проект'>
           <TextInput
-            name={"webSite"}
-            value={values.webSite}
+            name={"demoUrl"}
+            value={values.demoUrl}
             setValue={handleChange}
             placeholder={"https://hooli.com"}
+            type={"text"}
+          />
+        </Label>
+
+        <Label label='Ссылка на презентацию'>
+          <TextInput
+            name={"presentationUrl"}
+            value={values.presentationUrl}
+            setValue={handleChange}
+            placeholder={"drive.google.com"}
             type={"text"}
           />
         </Label>
@@ -147,34 +158,28 @@ const CreateProject = () => {
 
       <Title title='Презентация' />
       <Wrapper>
-        <div className='grid grid-cols-2 grid-rows-1 gap-x-2'>
-          <Label label='Обложка'>
-            <UploadInput
-              file={values.coverUrl}
-              setFile={(file: File) => setFieldValue("coverUrl", file)}
-            />
-          </Label>
-
-          {/* <Label label='Обложка'>
-            <UploadInput />
-          </Label>
-        </div>
-
-        <Label label='Презентация'>
-          <UploadInput />
+        <Label label='Обложка'>
+          <UploadInput
+            file={values.coverUrl}
+            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.files) {
+                setFieldValue("coverUrl", event.target.files[0])
+              }
+            }}
+          />
         </Label>
 
         <Label label='Скриншоты'>
-          <div className='grid grid-cols-6 gap-5'>
-            <UploadInput />
-            <UploadInput />
-            <UploadInput />
-            <UploadInput />
-            <UploadInput />
-            <UploadInput />
-          </div> */}
-          {/* </Label> */}
-        </div>
+          <UploadInput
+            multiple
+            file={values.screenShotsUrl}
+            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.files) {
+                setFieldValue("screenShotsUrl", event.target.files)
+              }
+            }}
+          />
+        </Label>
       </Wrapper>
 
       <div className='flex justify-between'>

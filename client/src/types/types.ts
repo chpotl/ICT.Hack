@@ -23,16 +23,13 @@ export interface IProject {
   shortDescription: string
   longDescription: string
   investments: number
-  webSite: string
-  logoUrl: string
-  coverUrl: string
+  coverUrl: object
   presentationUrl: string
-  screenShotsUrl: string[]
+  screenShotsUrl: object[]
   teamMembers: string[]
   moderated: boolean
   creator: ICreator
   demoUrl: string
-  region: string
   walletAddress: string
   trendIndex: number
   freeCashFlow: number
