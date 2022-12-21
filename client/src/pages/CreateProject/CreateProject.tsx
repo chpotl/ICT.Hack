@@ -134,7 +134,7 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label required label={"Адрес крипто кошелька"}>
+        <Label label={"Адрес крипто кошелька"}>
           <TextInput
             name={"walletAddress"}
             value={values.walletAddress}

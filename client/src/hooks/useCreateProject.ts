@@ -8,6 +8,7 @@ import { api } from "../services/axios"
 
 export const useCreateProject = () => {
   //InitialValues
+
   const mutate = (values: any) => {
     try {
       const data = new FormData()
@@ -84,7 +85,7 @@ export const useCreateProject = () => {
       teamMembers: Yup.array().of(Yup.string()),
       moderated: Yup.boolean(),
       demoUrl: Yup.string().required("Required"),
-      walletAddress: Yup.string().required("Required"),
+      walletAddress: Yup.string(),
       freeCashFlow: Yup.number(),
       realisation: Yup.string(),
     }),
@@ -92,6 +93,8 @@ export const useCreateProject = () => {
       mutate(values)
     },
   })
+
+  console.log(errors)
 
   return {
     values,
