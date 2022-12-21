@@ -57,6 +57,7 @@ const CreateProject = () => {
             selectors={values.tags}
             setSelectors={(tags: string) => setFieldValue("tags", tags)}
             placeholder={"теги проекта"}
+            type={"text"}
           />
         </Label>
 
@@ -146,6 +147,7 @@ const CreateProject = () => {
 
         <Label label='Команда'>
           <EnterInput
+            type={"text"}
             enterTitle='нажмите Enter после ввода имени пользователя'
             selectors={values.teamMembers}
             setSelectors={(teamMembers: string) =>

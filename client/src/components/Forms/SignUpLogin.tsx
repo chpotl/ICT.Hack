@@ -52,7 +52,7 @@ export const SignUpLogin: FC<Props> = ({ setUser, setToken, close }) => {
       mutate({
         email: formik.values.email,
         password: formik.values.password,
-      })
+      } as any)
     },
   })
 

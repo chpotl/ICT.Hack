@@ -20,7 +20,9 @@ export const useCreateProject = () => {
   //     })
   //   }
   // })
-  const mutate = (values: InitialValues) => {
+
+  //InitialValues
+  const mutate = (values: any) => {
     try {
       const files = new FormData()
 
@@ -36,14 +38,9 @@ export const useCreateProject = () => {
         }
       }
 
-      api
-        .post("/api/project", files, {
-          withCredentials: true,
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          // },
-        })
-        .then((data) => console.log(data))
+      api.post("/api/project", files, {
+        withCredentials: true,
+      })
     } catch (err) {
       console.log(err)
     }
@@ -83,20 +80,15 @@ export const useCreateProject = () => {
   } = useFormik({
     initialValues,
     validationSchema: Yup.object({
-      name: Yup.string(),
-      // .required("Required")
-      category: Yup.string(),
-      // .required("Required")
-      tags: Yup.array().of(Yup.string()),
-      // .required("Required")
-      shortDescription: Yup.string(),
-      // .required("Required")
-      longDescription: Yup.string(),
-      // .required("Required")
+      name: Yup.string().required("Required"),
+      category: Yup.string().required("Required"),
+      tags: Yup.array().of(Yup.string()).required("Required"),
+      shortDescription: Yup.string().required("Required"),
+      longDescription: Yup.string().required("Required"),
       investments: Yup.number(),
       // coverUrl: Yup.object(),
       presentationUrl: Yup.string(),
-      //screenShotsUrl: Yup.array().of(Yup.object()),
+      // screenShotsUrl: Yup.array().of(Yup.object()),
       teamMembers: Yup.array().of(Yup.string()),
       moderated: Yup.boolean(),
       demoUrl: Yup.string(),
@@ -105,20 +97,9 @@ export const useCreateProject = () => {
       realisation: Yup.string(),
     }),
     onSubmit: () => {
-      console.log(values.coverUrl)
-
-      // const formData = new FormData()
-      // for (let value in values) {
-      //   formData.append(value, values[value])
-      // }
-
-      // console.log(formData)
-
       mutate(values)
     },
   })
-
-  //console.log("errors", errors)
 
   return {
     values,

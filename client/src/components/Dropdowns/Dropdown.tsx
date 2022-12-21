@@ -39,7 +39,7 @@ export const Dropdown = <T,>({
       {isOpened && (
         <div className='flex flex-col gap-y-2'>
           {options
-            ? options.map((option) => {
+            ? options.map((option, i) => {
                 return (
                   <DropdownItem
                     activeOption={activeOption}
@@ -47,7 +47,7 @@ export const Dropdown = <T,>({
                     optionSelection={optionSelection}
                     option={option}
                     onClick={onChange}
-                    key={option._id}
+                    key={i}
                   />
                 )
               })

@@ -1,8 +1,11 @@
 import React, { FC, useState } from "react"
-import { ILabelInput } from "./LabelInput"
+import { ITextInput } from "../../types/types"
 import { SelectButton } from "../Buttons/SelectButton"
 
-type TEnterInput = Omit<ILabelInput, "setValue">
+type TEnterInput = Omit<ITextInput, "setValue" | "value"> & {
+  setSelectors: any
+  selectors: any
+}
 
 interface Props extends TEnterInput {
   enterTitle: string
@@ -18,7 +21,7 @@ export const EnterInput: FC<Props> = ({
 }) => {
   const [textInput, setTextInput] = useState("")
 
-  const handleSetSelectors = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleSetSelectors = (e: any) => {
     if (e.key === "Enter") {
       setSelectors([...selectors, e.target.value])
       e.preventDefault()
@@ -45,7 +48,7 @@ export const EnterInput: FC<Props> = ({
       <span className='text-gray'>{enterTitle}</span>
 
       <div className='flex flex-wrap gap-2 w-full'>
-        {selectors.map((select, i) => (
+        {selectors.map((select: string, i: React.Key | null | undefined) => (
           <SelectButton
             handleRemoveSelector={handleRemoveSelector}
             title={select}

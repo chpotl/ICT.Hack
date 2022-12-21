@@ -23,7 +23,7 @@ export interface IProject {
   shortDescription: string
   longDescription: string
   investments: number
-  coverUrl: Blob
+  coverUrl: any
   presentationUrl: string
   screenShotsUrl: Blob[]
   teamMembers: string[]
@@ -93,7 +93,7 @@ export interface IDropdown<T> {
 
 export interface ITextInput {
   value: string
-  setValue: () => void
+  setValue: any
   placeholder: string
   type: HTMLInputTypeAttribute | undefined
   name?: string

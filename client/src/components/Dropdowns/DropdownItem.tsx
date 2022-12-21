@@ -5,7 +5,7 @@ export interface IDropdownItem {
   option: any
   onClick: React.Dispatch<React.SetStateAction<string>>
   activeOption: string
-  selection?: string
+  selection?: any
   optionSelection?: string
 }
 

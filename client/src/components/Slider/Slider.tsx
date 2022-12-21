@@ -3,7 +3,7 @@ import { Image } from "./Image"
 import { Indicator } from "./Indicator"
 
 interface Props {
-  images: string[] | undefined
+  images: Blob[] | undefined
 }
 
 export const Slider: FC<Props> = ({ images }) => {

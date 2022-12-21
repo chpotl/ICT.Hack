@@ -14,7 +14,7 @@ interface Props {
 export const Filters: FC<Props> = ({ setCategory, setTag, tag, category }) => {
   const { categories, tags } = useFilters()
 
-  const dropdowns: IDropdown<T>[] = [
+  const dropdowns: IDropdown<any>[] = [
     {
       activeOption: category,
       placeholder: "Категория",

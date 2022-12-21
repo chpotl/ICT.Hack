@@ -55,11 +55,10 @@ const UpdateProfile = () => {
         <div className='grid grid-cols-[0.5fr__1fr] gap-x-5 w-full'>
           <Label label='Страна' required>
             <Dropdown
-              title={"страна"}
-              data={["1", "2", "3"]}
-              selectOption={""}
-              select={""}
-              onSelect={() => {}}
+              activeOption={""}
+              placeholder={""}
+              options={[]}
+              onChange={() => {}}
             />
           </Label>
           <Label label='Город' required>
@@ -92,6 +91,7 @@ const UpdateProfile = () => {
             selectors={roles}
             setSelectors={setRoles}
             placeholder={"мои роли"}
+            type={"text"}
           />
         </Label>
 
@@ -101,6 +101,7 @@ const UpdateProfile = () => {
             selectors={skills}
             setSelectors={setSkills}
             placeholder={"мои навыки"}
+            type={"text"}
           />
         </Label>
       </Wrapper>
