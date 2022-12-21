@@ -96,7 +96,7 @@ const Profile = () => {
 
       <Wrapper>
         <h2 className='text-2xl font-bold'>Bio</h2>
-        <p>{data?.bio}</p>
+        {data?.bio ? <p>{data?.bio}</p> : null}
       </Wrapper>
 
       <div className='border border-lightGray p-5 rounded-[20px]'>
