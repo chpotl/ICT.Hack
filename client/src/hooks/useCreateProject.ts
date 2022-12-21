@@ -5,23 +5,31 @@ import * as Yup from "yup"
 import { useMutation } from "wagmi"
 import { ProjectService } from "../services/project"
 import { api } from "../services/axios"
+import { useNavigate } from "react-router"
 
 export const useCreateProject = () => {
-  //InitialValues
+  const navigate = useNavigate()
 
-  const mutate = (values: any) => {
-    try {
-      const data = new FormData()
-      for (let value in values) {
-        data.append(value, values[value])
-      }
-      api.post("/api/project", data, {
-        withCredentials: true,
-      })
-    } catch (err) {
-      console.log(err)
+  const { mutate } = useMutation(
+    (project) => ProjectService.createNew(project),
+    {
+      onSuccess: () => navigate("/"),
     }
-  }
+  )
+
+  // const mutate = (values: any) => {
+  //   try {
+  //     const data = new FormData()
+  //     for (let value in values) {
+  //       data.append(value, values[value])
+  //     }
+  //     api.post("/api/project", data, {
+  //       withCredentials: true,
+  //     })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   type InitialValues = Omit<
     IProject,
@@ -90,11 +98,9 @@ export const useCreateProject = () => {
       realisation: Yup.string(),
     }),
     onSubmit: () => {
-      mutate(values)
+      mutate(values as any)
     },
   })
-
-  console.log(errors)
 
   return {
     values,

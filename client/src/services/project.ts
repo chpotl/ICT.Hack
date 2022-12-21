@@ -49,13 +49,24 @@ export const ProjectService = {
     const { data } = await api.get("/api/project")
     return data
   },
-  async createNew(project: IProject): Promise<IProject> {
-    return api.post("/api/project", project, {
-      withCredentials: true,
-      // headers: {
-      //   "Content-Type": "multipart/form-data",
-      // },
-    })
+  async createNew(project: any): Promise<any> {
+    try {
+      const data = new FormData()
+      for (let value in project) {
+        data.append(value, project[value])
+      }
+      api.post("/api/project", data, {
+        withCredentials: true,
+      })
+    } catch (err) {
+      console.log(err)
+    }
+
+    // return api.post("/api/project", project, {
+    //   withCredentials: true,
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    // },
   },
   async upload(photo: any) {
     return api.post("/api/project", photo, {
