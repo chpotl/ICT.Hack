@@ -11,7 +11,11 @@ export const Form: FC<Props> = ({ children, onSubmit, title }) => {
   return (
     <Wrapper>
       <h1 className='font-bold text-4xl mb-5'>{title}</h1>
-      <form className='flex flex-col gap-y-5' onSubmit={onSubmit}>
+      <form
+        className='flex flex-col gap-y-5'
+        onSubmit={onSubmit}
+        encType='multipart/form-data'
+      >
         {children}
       </form>
     </Wrapper>
