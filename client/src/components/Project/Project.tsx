@@ -3,6 +3,8 @@ import { IProject } from "../../types/types"
 import { Button } from "../Buttons/Button"
 import { Tag } from "./Tag"
 import { Link } from "react-router-dom"
+import { useQuery } from "wagmi"
+import axios from "axios"
 
 interface Props {
   project: IProject
@@ -23,7 +25,10 @@ export const Project: FC<Props> = ({ project }) => {
     <Link to={`project/${project._id}`}>
       <div className='border border-lightGray rounded-[20px] overflow-hidden'>
         {/* hover:scale-105 transition-transform duration-500 easy-in-out */}
-        <img src={project.logoUrl} className='h-60 w-full object-cover' />
+        <img
+          src={`http://127.0.0.1:3030/${project.coverUrl}`}
+          className='h-60 w-full object-cover'
+        />
 
         <div className='flex flex-col p-5'>
           <div className='flex flex-wrap gap-2 mb-[10px]'>

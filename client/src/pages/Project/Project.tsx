@@ -7,7 +7,7 @@ import { LinkButton } from "../../components/Buttons/LinkButton"
 import { Wrapper } from "../../components/Forms/Wrapper"
 import { Slider } from "../../components/Slider/Slider"
 import { ProjectService } from "../../services/project"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useModal } from "../../hooks/useModal"
 import { Modal } from "../../components/Modals/Modal"
@@ -57,6 +57,8 @@ export const Project = () => {
     setAmount(e.target.value)
   }
 
+  console.log(data?.demoUrl)
+
   return (
     <Wrapper>
       <Slider images={data?.screenShotsUrl} />
@@ -68,7 +70,7 @@ export const Project = () => {
             <p className='font-normal text-xl'>{data?.shortDescription}</p>
           </div>
           <div className='flex gap-x-5 items-center mt-[10px]'>
-            <a target={"_blank"} href={data?.presentationUrl}>
+            <a href={`https://${data?.presentationUrl}`}>
               <div
                 className={`p-[20px] py-[10px] font-bold text-2xl border rounded-[10px] border-lightGray`}
               >
@@ -76,7 +78,7 @@ export const Project = () => {
               </div>
             </a>
 
-            <a target={"_blank"} href={data?.demoUrl}>
+            <a href={`https://${data?.demoUrl}`}>
               <div
                 className={`p-[20px] py-[10px] font-bold text-2xl rounded-[10px] bg-white`}
               >

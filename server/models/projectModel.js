@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const trendController = require('../controllers/trendController');
-const validator = require('validator');
+const mongoose = require("mongoose")
+const trendController = require("../controllers/trendController")
+const validator = require("validator")
 
 const projectSchema = new mongoose.Schema({
   name: {
@@ -12,7 +12,7 @@ const projectSchema = new mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Category',
+    ref: "Category",
     required: true,
   },
   tags: [
@@ -58,7 +58,7 @@ const projectSchema = new mongoose.Schema({
   ],
   creator: {
     type: mongoose.Schema.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   demoUrl: {
     type: String,
@@ -66,7 +66,7 @@ const projectSchema = new mongoose.Schema({
   },
   walletAddress: {
     type: String,
-    validate: [validator.isEthereumAddress, 'not an eth address'],
+    validate: [validator.isEthereumAddress, "not an eth address"],
     required: true,
     unique: true,
   },
@@ -84,15 +84,17 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+})
 
-projectSchema.pre('save', async function (next) {
+projectSchema.pre("save", async function (next) {
   if (!this.tags) {
-    return next(new AppError('Tags are empty', 500));
+    return next(new AppError("Tags are empty", 500))
   }
-  this.trendIndex = Math.round(await trendController.getIndex(this.tags));
-  next();
-});
+  this.trendIndex = Math.round(
+    await trendController.getIndex(this.tags[0].split(","))
+  )
+  next()
+})
 
-const Project = mongoose.model('Project', projectSchema);
-module.exports = Project;
+const Project = mongoose.model("Project", projectSchema)
+module.exports = Project

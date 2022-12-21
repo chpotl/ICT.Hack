@@ -58,12 +58,13 @@ exports.getById = catchAsync(async (req, res, next) => {
 })
 
 exports.create = catchAsync(async (req, res, next) => {
-  console.log(req.files)
+  // console.log(req.files)
   console.log(req.body)
+  console.log(req.body.tags)
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
-    tags: req.body.tags,
+    tags: req.body.tags.split(","),
     shortDescription: req.body.shortDescription,
     longDescription: req.body.longDescription,
     coverUrl: req.files.coverUrl[0].path,
@@ -71,10 +72,10 @@ exports.create = catchAsync(async (req, res, next) => {
     screenShotsUrl: [
       req.files.screenShot1[0].path,
       req.files.screenShot2[0].path,
-      req.files.screenShot3[0].path,
-      req.files.screenShot4[0].path,
-      req.files.screenShot5[0].path,
-      req.files.screenShot6[0].path,
+      // req.files.screenShot3[0].path,
+      // req.files.screenShot4[0].path,
+      // req.files.screenShot5[0].path,
+      // req.files.screenShot6[0].path,
     ],
     teamMembers: req.body.teamMembers,
     demoUrl: req.body.demoUrl,
@@ -85,8 +86,9 @@ exports.create = catchAsync(async (req, res, next) => {
     freeCashFlow: req.body.freeCashFlow,
     realisation: req.body.realisation,
   })
+
   if (req.body.tags) {
-    const tags = req.body.tags
+    const tags = req.body.tags.split(",")
     tags.forEach(async (tag) => {
       return await Tag.findOneAndUpdate(
         { name: tag },
