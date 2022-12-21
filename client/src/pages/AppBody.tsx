@@ -10,8 +10,8 @@ import { ProjectService } from "../services/project"
 
 type Props = {
   children: React.ReactNode
-  token: string
-  setToken: React.Dispatch<React.SetStateAction<string>>
+  token: string | null
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const AppBody = ({ children, token, setToken }: Props) => {

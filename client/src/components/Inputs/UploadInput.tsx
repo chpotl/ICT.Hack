@@ -52,18 +52,17 @@ export const UploadInput: FC<Props> = ({ file, setFile, multiple = false }) => {
         onClick={handleClick}
         className='flex items-center justify-center w-full p-5'
       >
-        {!preview && (
-          <div className='flex flex-col items-center'>
-            <Upload />
-            <span>{`Загрузить ${multiple ? "несколько" : ""}`}</span>
-          </div>
-        )}
-        {preview && (
+        {preview ? (
           <img
             src={preview as string}
             className='rounded-[20px] w-full object-cover h-[200px]'
             alt='preview'
           />
+        ) : (
+          <div className='flex flex-col items-center'>
+            <Upload />
+            <span>{`Загрузить ${multiple ? "несколько" : ""}`}</span>
+          </div>
         )}
       </button>
       <input

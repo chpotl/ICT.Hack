@@ -11,7 +11,6 @@ import { Wrapper } from "../../components/Forms/Wrapper"
 import { useCreateProject } from "../../hooks/useCreateProject"
 import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
-import { useState } from "react"
 
 const CreateProject = () => {
   const {

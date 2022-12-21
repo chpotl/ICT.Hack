@@ -7,7 +7,7 @@ import { SearchInput } from "../Search/SearchInput"
 import { Links } from "./Links"
 
 interface Props {
-  token: string | undefined
+  token: string | null
   user: any
   toggle: () => void
   clearUser: () => void

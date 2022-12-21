@@ -25,6 +25,7 @@ export const Dropdown = <T,>({
   return (
     <div className='rounded-[10px]'>
       <button
+        type='button'
         onClick={handleOpenDropdown}
         className={`${
           border && "border border-lightGray"
@@ -37,7 +38,7 @@ export const Dropdown = <T,>({
       </button>
 
       {isOpened && (
-        <div className='flex flex-col gap-y-2'>
+        <div className='flex flex-col'>
           {options
             ? options.map((option, i) => {
                 return (

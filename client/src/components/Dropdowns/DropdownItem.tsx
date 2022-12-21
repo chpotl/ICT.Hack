@@ -37,6 +37,7 @@ export const DropdownItem: FC<IDropdownItem> = ({
       } rounded-[10px]`}
     >
       <button
+        type='button'
         onClick={handleChange}
         className={`font-normal p-2 text-start w-full
         `}
