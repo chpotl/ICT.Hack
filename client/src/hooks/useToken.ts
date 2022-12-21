@@ -3,7 +3,7 @@ import Cookies from "js-cookie"
 import { useCookies } from "react-cookie"
 
 export const useToken = () => {
-  const [token, setToken] = useState(Cookies.get("jwt") || "")
+  const [token, setToken] = useState(Cookies.get("jwt") || null)
 
   return {
     token,

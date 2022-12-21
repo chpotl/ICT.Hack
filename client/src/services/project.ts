@@ -65,4 +65,10 @@ export const ProjectService = {
       },
     })
   },
+  async getMe() {
+    const { data } = await api.get("/api/user/me", {
+      withCredentials: true,
+    })
+    return data
+  },
 }
