@@ -1,70 +1,67 @@
-const AppError = require("../utils/appError")
-const catchAsync = require("../utils/catchAsync")
-const Project = require("../models/projectModel")
-const Tag = require("../models/tagModel")
+const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
+const Project = require('../models/projectModel');
+const Tag = require('../models/tagModel');
 
 exports.getAll = catchAsync(async (req, res, next) => {
-  const page = +req.query.page || 1
-  const limit = +req.query.limit || 10
-  const tagsReq = req.query.tags
-  const regionsReq = req.query.regions
-  const categoryReq = req.query.category
-  const minInvest = req.query.minInvest || 0
-  const maxInvest = req.query.maxInvest || Infinity
-  let match = {}
-  console.log(req.query)
+  const page = +req.query.page || 1;
+  const limit = +req.query.limit || 10;
+  const tagsReq = req.query.tags;
+  const regionsReq = req.query.regions;
+  const categoryReq = req.query.category;
+  const minInvest = req.query.minInvest || 0;
+  const maxInvest = req.query.maxInvest || Infinity;
+  let match = {};
+  console.log(req.query);
   if (categoryReq) {
-    match.category = categoryReq
+    match.category = categoryReq;
   }
   if (tagsReq) {
-    const tagsArr = tagsReq.split(",").map((el) => {
-      return { tags: el }
-    })
-    match.$or = tagsArr
+    const tagsArr = tagsReq.split(',').map((el) => {
+      return { tags: el };
+    });
+    match.$or = tagsArr;
   }
   if (regionsReq) {
-    const regionsArr = regionsReq.split(",").map((el) => {
-      return { region: el }
-    })
-    match.$or = regionsArr
+    const regionsArr = regionsReq.split(',').map((el) => {
+      return { region: el };
+    });
+    match.$or = regionsArr;
   }
   match.$and = [
     { investments: { $gte: minInvest } },
     { investments: { $lte: maxInvest } },
-  ]
+  ];
   const projects = await Project.find(match)
-    .populate("category creator")
+    .populate('category creator')
     .limit(limit)
     .skip((page - 1) * limit)
-    .sort({ trendIndex: -1 })
+    .sort({ trendIndex: -1 });
   res.status(200).json({
-    message: "success",
+    message: 'success',
     found: projects.length,
     projects,
-  })
-})
+  });
+});
 
 exports.getById = catchAsync(async (req, res, next) => {
   const project = await Project.findById(req.params.projectId).populate(
-    "category creator teamMembers"
-  )
+    'category creator teamMembers'
+  );
   if (!project) {
-    return next(new AppError("No such project", 404))
+    return next(new AppError('No such project', 404));
   }
   res.status(200).json({
-    message: "success",
+    message: 'success',
     project,
-  })
-})
+  });
+});
 
 exports.create = catchAsync(async (req, res, next) => {
-  // console.log(req.files)
-  console.log(req.body)
-  console.log(req.body.tags)
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
-    tags: req.body.tags.split(","),
+    tags: req.body.tags.split(','),
     shortDescription: req.body.shortDescription,
     longDescription: req.body.longDescription,
     coverUrl: req.files.coverUrl[0].path,
@@ -72,33 +69,32 @@ exports.create = catchAsync(async (req, res, next) => {
     screenShotsUrl: [
       req.files.screenShot1[0].path,
       req.files.screenShot2[0].path,
-      // req.files.screenShot3[0].path,
-      // req.files.screenShot4[0].path,
-      // req.files.screenShot5[0].path,
-      // req.files.screenShot6[0].path,
+      req.files.screenShot3[0].path,
+      req.files.screenShot4[0].path,
+      req.files.screenShot5[0].path,
+      req.files.screenShot6[0].path,
     ],
     teamMembers: req.body.teamMembers,
     demoUrl: req.body.demoUrl,
     creator: req.user._id,
     region: req.body.region,
     investments: req.body.investments,
-    walletAddress: req.body.walletAddress,
     freeCashFlow: req.body.freeCashFlow,
     realisation: req.body.realisation,
-  })
+  });
 
   if (req.body.tags) {
-    const tags = req.body.tags.split(",")
+    const tags = req.body.tags.split(',');
     tags.forEach(async (tag) => {
       return await Tag.findOneAndUpdate(
         { name: tag },
         { name: tag },
         { upsert: true }
-      )
-    })
+      );
+    });
   }
   res.status(200).json({
-    message: "success",
+    message: 'success',
     newProject,
-  })
-})
+  });
+});
