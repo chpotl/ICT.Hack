@@ -20,6 +20,7 @@ import {
 import { BigNumber } from "ethers"
 import { TextInput } from "../../components/Inputs/TextInput"
 import { ethers } from "ethers"
+import { freeCashFlowConverter } from "../../utils/freeCashFlowConverter"
 
 export const Project = () => {
   const { id } = useParams()
@@ -99,25 +100,44 @@ export const Project = () => {
               </span>
               <span>полученные инвестиции</span>
             </div>
-            <div className='mt-5'>
+
+            <div className='flex flex-col text-xl font-normal'>
+              <p>
+                FCF:{" "}
+                <span className='font-bold'>
+                  {freeCashFlowConverter(data?.freeCashFlow!)}
+                </span>
+              </p>
+              <p>
+                Срок реализации:{" "}
+                <span className='font-bold'>{data?.realisation}</span>
+              </p>
+            </div>
+
+            <div>
               <span className='text-2xl font-normal'>Команда</span>
               <div className='flex flex-wrap gap-5 mt-[10px]'>
-                {/* {data?.teamMembers.map((person) => (
+                {data?.teamMembers[0].split(",").map((person) => (
                   <Avatar person={person} />
-                ))} */}
+                ))}
               </div>
             </div>
           </Wrapper>
+
           <div className='flex flex-col mt-5'>
             <div className='flex gap-x-5'>
               <Button
                 title={"Инвестировать"}
-                className={"bg-darkGreen rounded-[10px] w-full"}
+                className={
+                  "bg-darkGreen rounded-[10px] py-[16px] px-[20px] w-full hover:bg-mainGreen transition-colors duration-300"
+                }
                 onClick={toggle}
               />
               <Button
-                title={"Иная поддержка"}
-                className={"bg-mainGreen rounded-[10px] py-[10px] w-full"}
+                title={"Присоединиться"}
+                className={
+                  "bg-darkGreen rounded-[10px] py-[16px] px-[20px] w-full hover:bg-mainGreen transition-colors duration-300"
+                }
                 onClick={() => {}}
               />
             </div>

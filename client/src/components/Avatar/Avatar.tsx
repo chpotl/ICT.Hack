@@ -1,23 +1,15 @@
 import React, { FC } from "react"
+import chelik from "../../assets/chelik.jpg"
 
 interface Props {
-  person: {
-    image: string
-    name: string
-  }
+  person: string
 }
 
 export const Avatar: FC<Props> = ({ person }) => {
   return (
     <div className='flex flex-col items-center'>
-      <img
-        src={person.image}
-        alt=''
-        className='rounded-full w-[70px] h-[70px]'
-      />
-      <span className='text-darkGreen font-normal text-base'>
-        {person.name}
-      </span>
+      <img src={chelik} alt='' className='rounded-full w-[70px] h-[70px]' />
+      <span className='text-darkGreen font-normal text-base'>{person}</span>
     </div>
   )
 }

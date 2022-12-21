@@ -25,7 +25,7 @@ export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
       </div>
 
       <div className='h-full flex items-center'>
-        <SearchInput placeholder='Искать грант' />
+        <SearchInput placeholder='Искать' />
       </div>
 
       <div className='h-full flex items-center'>
