@@ -58,9 +58,8 @@ exports.getById = catchAsync(async (req, res, next) => {
 });
 
 exports.create = catchAsync(async (req, res, next) => {
-  const screenShotsUrls = req.files.screenShotsUrl.map((el) => {
-    return el.path;
-  });
+  console.log(req.files);
+  console.log(req.body);
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
@@ -69,7 +68,14 @@ exports.create = catchAsync(async (req, res, next) => {
     longDescription: req.body.longDescription,
     coverUrl: req.files.coverUrl[0].path,
     presentationUrl: req.body.presentationUrl,
-    screenShotsUrl: screenShotsUrls,
+    screenShotsUrl: [
+      req.files.screenShot1[0].path,
+      req.files.screenShot2[0].path,
+      req.files.screenShot3[0].path,
+      req.files.screenShot4[0].path,
+      req.files.screenShot5[0].path,
+      req.files.screenShot6[0].path,
+    ],
     teamMembers: req.body.teamMembers,
     demoUrl: req.body.demoUrl,
     creator: req.user._id,
