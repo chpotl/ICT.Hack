@@ -23,9 +23,9 @@ export interface IProject {
   shortDescription: string
   longDescription: string
   investments: number
-  coverUrl: object
+  coverUrl: Blob
   presentationUrl: string
-  screenShotsUrl: object[]
+  screenShotsUrl: Blob[]
   teamMembers: string[]
   moderated: boolean
   creator: ICreator

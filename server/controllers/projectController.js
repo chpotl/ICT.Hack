@@ -58,15 +58,8 @@ exports.getById = catchAsync(async (req, res, next) => {
 })
 
 exports.create = catchAsync(async (req, res, next) => {
-<<<<<<< HEAD
-  console.log(req.files);
-  console.log(req.body);
-=======
   console.log(req.files)
-  const screenShotsUrls = req.files.screenShotsUrl.map((el) => {
-    return el.path
-  })
->>>>>>> 0979fdd612c82e09e522c5968420c4d4b29497c0
+  console.log(req.body)
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,

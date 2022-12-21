@@ -20,20 +20,33 @@ export const useCreateProject = () => {
   //     })
   //   }
   // })
-  const mutate = (photo: any) => {
-    const formData = new FormData()
-    formData.append("coverUrl", photo)
-    // const data = new FormData()
-    // data.append("coverUrl", photo)
-    // console.log(data)
-    api
-      .post("/api/project", formData, {
-        withCredentials: true,
-        // headers: {
-        //   "Content-Type": "multipart/form-data",
-        // },
-      })
-      .then((data) => console.log(data))
+  const mutate = (values: InitialValues) => {
+    try {
+      const files = new FormData()
+
+      const screens = values.screenShotsUrl
+
+      for (let i = 0; i < screens.length; i++) {
+        files.append(`screenShot${i + 1}`, screens[i])
+      }
+
+      for (let value in values) {
+        if (value != "screenShotsUrl") {
+          files.append(value, values[value])
+        }
+      }
+
+      api
+        .post("/api/project", files, {
+          withCredentials: true,
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // },
+        })
+        .then((data) => console.log(data))
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   type InitialValues = Omit<
@@ -101,7 +114,7 @@ export const useCreateProject = () => {
 
       // console.log(formData)
 
-      mutate(values.coverUrl)
+      mutate(values)
     },
   })
 
