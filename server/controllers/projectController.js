@@ -58,6 +58,25 @@ exports.getById = catchAsync(async (req, res, next) => {
 });
 
 exports.create = catchAsync(async (req, res, next) => {
+  const screenShotsUrlArr = [];
+  if (req.files.screenShot1) {
+    screenShotsUrlArr.push(req.files.screenShot1[0].path);
+  }
+  if (req.files.screenShot2) {
+    screenShotsUrlArr.push(req.files.screenShot2[0].path);
+  }
+  if (req.files.screenShot3) {
+    screenShotsUrlArr.push(req.files.screenShot3[0].path);
+  }
+  if (req.files.screenShot4) {
+    screenShotsUrlArr.push(req.files.screenShot4[0].path);
+  }
+  if (req.files.screenShot5) {
+    screenShotsUrlArr.push(req.files.screenShot5[0].path);
+  }
+  if (req.files.screenShot6) {
+    screenShotsUrlArr.push(req.files.screenShot6[0].path);
+  }
   const newProject = await Project.create({
     name: req.body.name,
     category: req.body.category,
@@ -66,14 +85,7 @@ exports.create = catchAsync(async (req, res, next) => {
     longDescription: req.body.longDescription,
     coverUrl: req.files.coverUrl[0].path,
     presentationUrl: req.body.presentationUrl,
-    screenShotsUrl: [
-      req.files.screenShot1[0].path,
-      req.files.screenShot2[0].path,
-      req.files.screenShot3[0].path,
-      req.files.screenShot4[0].path,
-      req.files.screenShot5[0].path,
-      req.files.screenShot6[0].path,
-    ],
+    screenShotsUrl: screenShotsUrlArr,
     teamMembers: req.body.teamMembers,
     demoUrl: req.body.demoUrl,
     creator: req.user._id,
