@@ -129,14 +129,14 @@ export const Project = () => {
               <Button
                 title={"Инвестировать"}
                 className={
-                  "bg-darkGreen rounded-[10px] p-2 w-full hover:bg-mainGreen transition-colors duration-300"
+                  "bg-darkGreen rounded-[10px] py-[16px] px-[20px] w-full hover:bg-mainGreen transition-colors duration-300"
                 }
                 onClick={toggle}
               />
               <Button
-                title={"Присоединиться к проекту"}
+                title={"Присоединиться"}
                 className={
-                  "bg-darkGreen rounded-[10px] p-2 w-full hover:bg-mainGreen transition-colors duration-300"
+                  "bg-darkGreen rounded-[10px] py-[16px] px-[20px] w-full hover:bg-mainGreen transition-colors duration-300"
                 }
                 onClick={() => {}}
               />

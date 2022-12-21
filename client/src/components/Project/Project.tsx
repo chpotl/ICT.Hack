@@ -30,8 +30,8 @@ export const Project: FC<Props> = ({ project }) => {
           className='h-60 w-full object-cover'
         />
 
-        <div className='flex flex-col p-5'>
-          <div className='flex flex-wrap gap-2 mb-5'>
+        <div className='flex flex-col p-5 gap-y-5'>
+          <div className='flex flex-wrap gap-2'>
             {project.tags.map((tag) => {
               return <Tag title={tag} />
             })}
@@ -64,22 +64,25 @@ export const Project: FC<Props> = ({ project }) => {
           <h3>{project.shortDescription?.slice(0, 100)}...</h3>
 
           <div className='flex flex-col'>
-            <span className='text-[32px] font-bold'>
+            <span className='text-[32px] font-bold head '>
               ~ {project.investments} р.
             </span>
             <span>инвестиции</span>
           </div>
 
-          <div className='text-xl'>
-            FCF:{" "}
-            <span className=' text-darkGreen'>
-              {freeCashFlowConverter(project.freeCashFlow)}
-            </span>
-          </div>
-
-          <div className='mb-[37px] text-xl'>
-            Срок реализации{" "}
-            <span className=' text-darkGreen'>{project.realisation}</span>
+          <div className='flex flex-col text-xl'>
+            <div>
+              FCF:{" "}
+              <span className=' text-darkGreen font-bold'>
+                {freeCashFlowConverter(project.freeCashFlow)}
+              </span>
+            </div>
+            <div>
+              Срок реализации:{" "}
+              <span className=' text-darkGreen font-bold'>
+                {project.realisation}
+              </span>
+            </div>
           </div>
 
           <Button
