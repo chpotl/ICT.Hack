@@ -36,22 +36,22 @@ export const Project: FC<Props> = ({ project }) => {
               return <Tag title={tag} />
             })}
           </div>
-          <div className='flex justify-between'>
-            <div>
-              <h2 className='text-[32px] font-bold'>{project.name}</h2>
-            </div>
-            <div className='flex items-center gap-x-[10px]'>
-              <span
-                className={`font-bold text-[32px] ${trendColorSwitch(
-                  project.trendIndex
-                )}`}
-              >
-                {project.trendIndex}
-              </span>
-              <p>
-                индекс <br /> тренда
-              </p>
-            </div>
+
+          <div>
+            <h2 className='text-[32px] font-bold'>{project.name}</h2>
+          </div>
+
+          <div className='flex items-center gap-x-[10px]'>
+            <span
+              className={`font-bold text-[32px] ${trendColorSwitch(
+                project.trendIndex
+              )}`}
+            >
+              {project.trendIndex}
+            </span>
+            <p>
+              индекс <br /> тренда
+            </p>
           </div>
 
           <div className='text-base'>
