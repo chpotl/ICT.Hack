@@ -18,14 +18,21 @@ export const ProjectsList: FC<Props> = ({ filters }) => {
   })
 
   return (
-    <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative'>
+    <section
+      className={`${
+        projects?.length &&
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+      }`}
+    >
       {projects?.length ? (
         projects?.map((project) => (
           <Project project={project} key={project._id} />
         ))
       ) : (
-        <div className='p-5 border rounded-[20px] border-lightGray absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-          <span className='text-3xl'>Ничего не найдено</span>
+        <div className='w-full h-full flex justify-center items-center'>
+          <div className='p-5 border rounded-[20px] border-lightGray'>
+            <span className='text-3xl'>Ничего не найдено</span>
+          </div>
         </div>
       )}
     </section>
