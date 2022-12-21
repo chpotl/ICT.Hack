@@ -114,7 +114,7 @@ const CreateProject = () => {
             }
           />
         </Label>
-        <Label label='Ссылка на проект'>
+        <Label required label='Ссылка на проект'>
           <TextInput
             name={"demoUrl"}
             value={values.demoUrl}
@@ -124,7 +124,7 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label label='Ссылка на презентацию'>
+        <Label required label='Ссылка на презентацию'>
           <TextInput
             name={"presentationUrl"}
             value={values.presentationUrl}
@@ -134,7 +134,7 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label label={"Адрес крипто кошелька"}>
+        <Label required label={"Адрес крипто кошелька"}>
           <TextInput
             name={"walletAddress"}
             value={values.walletAddress}
@@ -170,29 +170,58 @@ const CreateProject = () => {
           />
         </Label>
 
-        {/* <Label label='Скриншоты'>
-          <UploadInput
-            multiple
-            file={values.screenShotsUrl}
-            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (event.target.files) {
-                setFieldValue("screenShotsUrl", event.target.files[0])
-              }
-            }}
-          />
-        </Label> */}
-
-        {/* <Label label='Скриншоты'>
-          <UploadInput
-            multiple
-            file={values.screenShotsUrl}
-            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (event.target.files) {
-                setFieldValue("screenShotsUrl", event.target.files)
-              }
-            }}
-          />
-        </Label> */}
+        <Label label='Скриншоты'>
+          <div className='flex flex-col gap-y-2 sm:grid sm:grid-cols-6 sm:gap-x-2'>
+            <UploadInput
+              file={values.screenShot1}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot1", event.target.files[0])
+                }
+              }}
+            />
+            <UploadInput
+              file={values.screenShot2}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot2", event.target.files[0])
+                }
+              }}
+            />
+            <UploadInput
+              file={values.screenShot3}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot3", event.target.files[0])
+                }
+              }}
+            />
+            <UploadInput
+              file={values.screenShot4}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot4", event.target.files[0])
+                }
+              }}
+            />
+            <UploadInput
+              file={values.screenShot5}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot5", event.target.files[0])
+                }
+              }}
+            />
+            <UploadInput
+              file={values.screenShot6}
+              setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+                if (event.target.files) {
+                  setFieldValue("screenShot6", event.target.files[0])
+                }
+              }}
+            />
+          </div>
+        </Label>
       </Wrapper>
 
       <div className='flex justify-between'>

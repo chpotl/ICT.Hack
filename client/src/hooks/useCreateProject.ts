@@ -7,38 +7,14 @@ import { ProjectService } from "../services/project"
 import { api } from "../services/axios"
 
 export const useCreateProject = () => {
-  // const { mutate } = useMutation((photo) => {
-  //   const data = new FormData()
-  //   data.append("coverUrl", photo)
-  //   // ProjectService.upload(photo)
-  //   const upload = async (photo: any) => {
-  //     return api.post("/api/project", photo, {
-  //       withCredentials: true,
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     })
-  //   }
-  // })
-
   //InitialValues
   const mutate = (values: any) => {
     try {
-      const files = new FormData()
-
-      const screens = values.screenShotsUrl
-
-      for (let i = 0; i < screens.length; i++) {
-        files.append(`screenShot${i + 1}`, screens[i])
-      }
-
+      const data = new FormData()
       for (let value in values) {
-        if (value != "screenShotsUrl") {
-          files.append(value, values[value])
-        }
+        data.append(value, values[value])
       }
-
-      api.post("/api/project", files, {
+      api.post("/api/project", data, {
         withCredentials: true,
       })
     } catch (err) {
@@ -48,9 +24,20 @@ export const useCreateProject = () => {
 
   type InitialValues = Omit<
     IProject,
-    "creator" | "_id" | "trendIndex" | "category" | "moderated"
+    | "creator"
+    | "_id"
+    | "trendIndex"
+    | "category"
+    | "moderated"
+    | "screenShotsUrl"
   > & {
     category: string
+    screenShot1: null
+    screenShot2: null
+    screenShot3: null
+    screenShot4: null
+    screenShot5: null
+    screenShot6: null
   }
 
   const initialValues: InitialValues = {
@@ -62,7 +49,12 @@ export const useCreateProject = () => {
     investments: 0,
     coverUrl: null,
     presentationUrl: "",
-    screenShotsUrl: [],
+    screenShot1: null,
+    screenShot2: null,
+    screenShot3: null,
+    screenShot4: null,
+    screenShot5: null,
+    screenShot6: null,
     teamMembers: [],
     demoUrl: "",
     walletAddress: "",
@@ -87,12 +79,12 @@ export const useCreateProject = () => {
       longDescription: Yup.string().required("Required"),
       investments: Yup.number(),
       // coverUrl: Yup.object(),
-      presentationUrl: Yup.string(),
+      presentationUrl: Yup.string().required("Required"),
       // screenShotsUrl: Yup.array().of(Yup.object()),
       teamMembers: Yup.array().of(Yup.string()),
       moderated: Yup.boolean(),
-      demoUrl: Yup.string(),
-      walletAddress: Yup.string(),
+      demoUrl: Yup.string().required("Required"),
+      walletAddress: Yup.string().required("Required"),
       freeCashFlow: Yup.number(),
       realisation: Yup.string(),
     }),

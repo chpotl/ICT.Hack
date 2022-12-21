@@ -5,7 +5,7 @@ import { Upload } from "../Icons/Upload"
 import { ErrorBoundary } from "react-error-boundary"
 
 interface Props {
-  file: File
+  file: File | null
   setFile: (event: React.ChangeEvent<HTMLInputElement>) => void
   multiple?: boolean
 }
