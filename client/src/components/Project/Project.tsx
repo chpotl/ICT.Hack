@@ -26,7 +26,7 @@ export const Project: FC<Props> = ({ project }) => {
       <div className='border border-lightGray rounded-[20px] overflow-hidden'>
         {/* hover:scale-105 transition-transform duration-500 easy-in-out */}
         <img
-          src={`http://127.0.0.1:3030/${project.coverUrl}`}
+          src={`${import.meta.env.VITE_API_URL}/${project.coverUrl}`}
           className='h-60 w-full object-cover'
         />
 

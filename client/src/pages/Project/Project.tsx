@@ -57,8 +57,6 @@ export const Project = () => {
     setAmount(e.target.value)
   }
 
-  console.log(data?.demoUrl)
-
   return (
     <Wrapper>
       <Slider images={data?.screenShotsUrl} />

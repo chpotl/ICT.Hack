@@ -8,7 +8,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi"
 import { infuraProvider } from "wagmi/providers/infura"
 import { publicProvider } from "wagmi/providers/public"
-import { ErrorBoundary } from "react-error-boundary"
+// import { ErrorBoundary } from "react-error-boundary"
 
 export const Providers: FC<ChildrenType> = ({ children }) => {
   const queryClient = new QueryClient()
@@ -33,15 +33,15 @@ export const Providers: FC<ChildrenType> = ({ children }) => {
   })
 
   return (
-    <ErrorBoundary fallback={<h1>oops...</h1>}>
-      <QueryClientProvider client={queryClient}>
-        <CookiesProvider>
-          <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
-          </WagmiConfig>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </CookiesProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
+    // <ErrorBoundary fallback={<h1>oops...</h1>}>
+    <QueryClientProvider client={queryClient}>
+      <CookiesProvider>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+        </WagmiConfig>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </CookiesProvider>
+    </QueryClientProvider>
+    // </ErrorBoundary>
   )
 }
