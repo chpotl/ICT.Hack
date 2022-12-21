@@ -171,7 +171,7 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label label='Скриншоты'>
+        {/* <Label label='Скриншоты'>
           <UploadInput
             multiple
             file={values.screenShotsUrl}
@@ -181,13 +181,13 @@ const CreateProject = () => {
               }
             }}
           />
-        </Label>
+        </Label> */}
       </Wrapper>
 
       <div className='flex justify-between'>
         <Button
           type='submit'
-          title={"Отправить на модерацию"}
+          title={"Создать проект"}
           className={"py-[16px] text-black bg-darkGreen rounded-[20px] px-14"}
         />
         <Button

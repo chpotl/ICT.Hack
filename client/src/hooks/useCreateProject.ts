@@ -60,7 +60,7 @@ export const useCreateProject = () => {
     shortDescription: "",
     longDescription: "",
     investments: 0,
-    coverUrl: {},
+    coverUrl: null,
     presentationUrl: "",
     screenShotsUrl: [],
     teamMembers: [],
