@@ -177,6 +177,18 @@ const CreateProject = () => {
             file={values.screenShotsUrl}
             setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.files) {
+                setFieldValue("screenShotsUrl", event.target.files[0])
+              }
+            }}
+          />
+        </Label> */}
+
+        {/* <Label label='Скриншоты'>
+          <UploadInput
+            multiple
+            file={values.screenShotsUrl}
+            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.files) {
                 setFieldValue("screenShotsUrl", event.target.files)
               }
             }}

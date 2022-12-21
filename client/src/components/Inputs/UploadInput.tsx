@@ -18,6 +18,7 @@ export const UploadInput: FC<Props> = ({ file, setFile, multiple = false }) => {
   useEffect(() => {
     if (file) {
       const reader = new FileReader()
+
       reader.readAsDataURL(file)
       reader.onload = () => {
         setPreview(reader.result)
