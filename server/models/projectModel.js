@@ -64,6 +64,11 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  walletAddress: {
+    type: String,
+    validate: [validator.isEthereumAddress, 'not an eth address'],
+    unique: true,
+  },
   trendIndex: {
     type: Number,
     required: true,

@@ -79,6 +79,7 @@ exports.create = catchAsync(async (req, res, next) => {
     creator: req.user._id,
     region: req.body.region,
     investments: req.body.investments,
+    walletAddress: req.body.walletAddress,
     freeCashFlow: req.body.freeCashFlow,
     realisation: req.body.realisation,
   });
