@@ -11,7 +11,6 @@ import { Wrapper } from "../../components/Forms/Wrapper"
 import { useCreateProject } from "../../hooks/useCreateProject"
 import { useQuery } from "react-query"
 import { ProjectService } from "../../services/project"
-import { useState } from "react"
 
 const CreateProject = () => {
   const {
@@ -171,7 +170,19 @@ const CreateProject = () => {
           />
         </Label>
 
-        <Label label='Скриншоты'>
+        {/* <Label label='Скриншоты'>
+          <UploadInput
+            multiple
+            file={values.screenShotsUrl}
+            setFile={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.files) {
+                setFieldValue("screenShotsUrl", event.target.files[0])
+              }
+            }}
+          />
+        </Label> */}
+
+        {/* <Label label='Скриншоты'>
           <UploadInput
             multiple
             file={values.screenShotsUrl}
@@ -181,13 +192,13 @@ const CreateProject = () => {
               }
             }}
           />
-        </Label>
+        </Label> */}
       </Wrapper>
 
       <div className='flex justify-between'>
         <Button
           type='submit'
-          title={"Отправить на модерацию"}
+          title={"Создать проект"}
           className={"py-[16px] text-black bg-darkGreen rounded-[20px] px-14"}
         />
         <Button

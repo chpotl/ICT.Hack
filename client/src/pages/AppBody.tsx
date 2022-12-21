@@ -5,17 +5,26 @@ import { useModal } from "../hooks/useModal"
 import { Modal } from "../components/Modals/Modal"
 import { SignUpLogin } from "../components/Forms/SignUpLogin"
 import { IUser } from "../types/types"
+import { useQuery } from "react-query"
+import { ProjectService } from "../services/project"
 
 type Props = {
   children: React.ReactNode
-  token: string
-  setToken: React.Dispatch<React.SetStateAction<string>>
+  token: string | null
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const AppBody = ({ children, token, setToken }: Props) => {
   const { isOpen, toggle, close } = useModal()
 
   const [user, setUser] = useState<IUser | {}>({})
+
+  useQuery(["get me"], () => ProjectService.getMe(), {
+    select: (data) => data.user,
+    onSuccess: (data) => {
+      setUser(data)
+    },
+  })
 
   const clearUser = () => {
     setToken("")

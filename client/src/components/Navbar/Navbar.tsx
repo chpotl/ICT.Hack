@@ -1,16 +1,13 @@
 import { FC, useState } from "react"
-import { useModal } from "../../hooks/useModal"
 import { Button } from "../Buttons/Button"
 import { Logo } from "../Logo/Logo"
-import { Modal } from "../Modals/Modal"
-import { SignUpLogin } from "../Forms/SignUpLogin"
 import { Menu } from "./Menu"
 import { Profile } from "./Profile"
 import { SearchInput } from "../Search/SearchInput"
 import { Links } from "./Links"
 
 interface Props {
-  token: string | undefined
+  token: string | null
   user: any
   toggle: () => void
   clearUser: () => void

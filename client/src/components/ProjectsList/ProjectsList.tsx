@@ -31,7 +31,11 @@ export const ProjectsList: FC<Props> = ({ filters }) => {
       ) : (
         <div className='w-full h-full flex justify-center items-center'>
           <div className='p-5 border rounded-[20px] border-lightGray'>
-            <span className='text-3xl'>Ничего не найдено</span>
+            <span className='text-3xl'>
+              {isError && "oops..."}
+              {isLoading && "загружаем..."}
+              {!isLoading && !isError && "ничего не найдено"}
+            </span>
           </div>
         </div>
       )}

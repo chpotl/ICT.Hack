@@ -5,6 +5,7 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useMutation } from "react-query"
 import { UserService } from "../../services/user"
+import { IUser } from "../../types/types"
 
 interface ISignUpLogin {
   email: string
@@ -12,8 +13,8 @@ interface ISignUpLogin {
 }
 
 interface Props {
-  setUser: React.Dispatch<React.SetStateAction<any>>
-  setToken: React.Dispatch<React.SetStateAction<string>>
+  setUser: React.Dispatch<React.SetStateAction<IUser | {}>>
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
   close: () => void
 }
 
