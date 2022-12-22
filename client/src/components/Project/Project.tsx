@@ -3,8 +3,6 @@ import { IProject } from "../../types/types"
 import { Button } from "../Buttons/Button"
 import { Tag } from "./Tag"
 import { Link } from "react-router-dom"
-import { useQuery } from "wagmi"
-import axios from "axios"
 import { freeCashFlowConverter } from "../../utils/freeCashFlowConverter"
 
 interface Props {
@@ -23,23 +21,21 @@ export const Project: FC<Props> = ({ project }) => {
   }
 
   return (
-    <div className=' border border-lightGray rounded-[20px] overflow-hidden'>
-      <Link to={`project/${project._id}`}>
+    <Link to={`project/${project._id}`}>
+      <article className='flex h-full flex-col justify-between border border-lightGray rounded-[20px] overflow-hidden'>
         <img
           src={`${import.meta.env.VITE_API_URL}/${project.coverUrl}`}
           className='h-60 w-full object-cover'
         />
 
-        <div className='flex flex-col p-5 gap-y-5'>
+        <div className='flex flex-col p-5 gap-y-5 h-full'>
           <div className='flex flex-wrap gap-2'>
             {project.tags.map((tag) => {
               return <Tag title={tag} />
             })}
           </div>
 
-          <div>
-            <h2 className='text-[32px] font-bold'>{project.name}</h2>
-          </div>
+          <h2 className='text-[32px] font-bold break-words'>{project.name}</h2>
 
           <div className='flex items-center gap-x-[10px]'>
             <span
@@ -54,14 +50,14 @@ export const Project: FC<Props> = ({ project }) => {
             </p>
           </div>
 
-          <div className='text-base'>
+          <h3>
             от{" "}
-            <span className=' text-darkGreen '>
-              @{project.creator.username}
-            </span>
-          </div>
+            <span className='text-darkGreen'>@{project.creator.username}</span>
+          </h3>
 
-          <h3>{project.shortDescription?.slice(0, 100)}...</h3>
+          <p className='break-words'>
+            {project.shortDescription?.slice(0, 100)}
+          </p>
 
           <div className='flex flex-col'>
             <span className='text-[32px] font-bold head '>
@@ -84,15 +80,14 @@ export const Project: FC<Props> = ({ project }) => {
               </span>
             </div>
           </div>
-
+        </div>
+        <div className='p-5'>
           <Button
             title={"Подробнее"}
-            className={
-              "bg-darkGreen py-[10px] rounded-[10px] text-center text-black"
-            }
+            className={"bg-darkGreen rounded-[10px] w-full text-black p-2"}
           />
         </div>
-      </Link>
-    </div>
+      </article>
+    </Link>
   )
 }
