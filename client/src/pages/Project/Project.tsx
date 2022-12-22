@@ -7,20 +7,17 @@ import { LinkButton } from "../../components/Buttons/LinkButton"
 import { Wrapper } from "../../components/Forms/Wrapper"
 import { Slider } from "../../components/Slider/Slider"
 import { ProjectService } from "../../services/project"
-import { Link, NavLink } from "react-router-dom"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useModal } from "../../hooks/useModal"
 import { Modal } from "../../components/Modals/Modal"
-import { SelectButton } from "../../components/Buttons/SelectButton"
 import {
   useAccount,
   usePrepareSendTransaction,
   useSendTransaction,
 } from "wagmi"
 import { BigNumber } from "ethers"
-import { TextInput } from "../../components/Inputs/TextInput"
 import { ethers } from "ethers"
-import { freeCashFlowConverter } from "../../utils/freeCashFlowConverter"
+import { divByMillion } from "../../utils/divByMillion"
 
 export const Project = () => {
   const { id } = useParams()
@@ -96,7 +93,7 @@ export const Project = () => {
           <Wrapper>
             <div className='flex flex-col'>
               <span className='font-bold text-[32px]'>
-                ~ {data?.investments} р.
+                ~ {divByMillion(data?.investments!)} р.
               </span>
               <span>полученные инвестиции</span>
             </div>
@@ -105,7 +102,7 @@ export const Project = () => {
               <p>
                 FCF:{" "}
                 <span className='font-bold'>
-                  {freeCashFlowConverter(data?.freeCashFlow!)}
+                  {divByMillion(data?.freeCashFlow!)} р.
                 </span>
               </p>
               <p>

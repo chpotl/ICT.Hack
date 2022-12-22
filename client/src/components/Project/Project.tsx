@@ -3,7 +3,7 @@ import { IProject } from "../../types/types"
 import { Button } from "../Buttons/Button"
 import { Tag } from "./Tag"
 import { Link } from "react-router-dom"
-import { freeCashFlowConverter } from "../../utils/freeCashFlowConverter"
+import { divByMillion } from "../../utils/divByMillion"
 
 interface Props {
   project: IProject
@@ -61,7 +61,7 @@ export const Project: FC<Props> = ({ project }) => {
 
           <div className='flex flex-col'>
             <span className='text-[32px] font-bold head '>
-              ~ {project.investments} р.
+              ~ {divByMillion(project.investments)} р.
             </span>
             <span>инвестиции</span>
           </div>
@@ -70,7 +70,7 @@ export const Project: FC<Props> = ({ project }) => {
             <div>
               FCF:{" "}
               <span className=' text-darkGreen font-bold'>
-                {freeCashFlowConverter(project.freeCashFlow)}
+                {divByMillion(project.freeCashFlow)} р.
               </span>
             </div>
             <div>
