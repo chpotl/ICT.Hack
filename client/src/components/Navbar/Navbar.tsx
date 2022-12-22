@@ -19,8 +19,8 @@ export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
   const isLogged = token ? true : false
 
   return (
-    <nav className='flex h-28 justify-between p-5'>
-      <div className='h-full pr-5'>
+    <nav className='flex gap-x-5 h-28 justify-between p-5'>
+      <div className='h-full'>
         <Logo />
       </div>
 
@@ -28,7 +28,7 @@ export const Navbar: FC<Props> = ({ token, user, toggle, clearUser }) => {
         <SearchInput placeholder='Искать' />
       </div>
 
-      <div className='h-full flex items-center'>
+      <div className='h-full sm:flex items-center hidden'>
         <Links />
       </div>
 

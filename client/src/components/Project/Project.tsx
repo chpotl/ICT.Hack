@@ -23,8 +23,8 @@ export const Project: FC<Props> = ({ project }) => {
   }
 
   return (
-    <Link to={`project/${project._id}`}>
-      <div className='border border-lightGray rounded-[20px] overflow-hidden'>
+    <div className=' border border-lightGray rounded-[20px] overflow-hidden'>
+      <Link to={`project/${project._id}`}>
         <img
           src={`${import.meta.env.VITE_API_URL}/${project.coverUrl}`}
           className='h-60 w-full object-cover'
@@ -92,7 +92,7 @@ export const Project: FC<Props> = ({ project }) => {
             }
           />
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }

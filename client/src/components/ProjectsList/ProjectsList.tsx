@@ -21,7 +21,7 @@ export const ProjectsList: FC<Props> = ({ filters }) => {
     <section
       className={`${
         projects?.length &&
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        "  grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-auto"
       }`}
     >
       {projects?.length ? (
